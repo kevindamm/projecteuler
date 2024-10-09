@@ -18,8 +18,8 @@ explorations
 TODOs.md
 RELEASE_NOTE*.md
 
-/cypress/videos/
-/cypress/screenshots/
+.vitepress/dist
+.vitepress/cache
 
 # Editor directories and files
 .vscode/*
