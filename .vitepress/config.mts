@@ -29,5 +29,9 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kevindamm/projecteuler' }
     ]
+  },
+
+  markdown: {
+    math: true
   }
 })
