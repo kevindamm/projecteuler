@@ -6,7 +6,18 @@ terminal :- total(?sum, 1000-1)
 
 total(?sum, ?n) :: value(?sum), value(?n)
 
+(% Naive solution that examines all integers, unless the runtime is very smart,
+ % inverting the mod constraint for the zero folding, transforming the modulus
+ % into a generator so that it only iterates over valid mod-3 and mod-5 values
+ % is conceivable, especially with the zero constant on the else branch.
+ %)
 total(?sum, ?n) = total(?sum+?k, ?n-1)
   where ?k := ?n
     if mod(?n, 3) == 0 or mod(?n, 5) == 0
     else 0
+
+(%
+ % Converting this into the constant-time implementation described in the blog
+ % would be truly impressive, but this is a functional form with no unbound vars
+ % so it would be possible for a sufficiently intelligent compiler|interpreter.
+ %)
