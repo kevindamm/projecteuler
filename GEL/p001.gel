@@ -1,0 +1,12 @@
+%% Problem 1 - Multiples of 3 or 5
+
+base value(?n) :- int(?n) and ?n #> 0
+
+terminal :- total(?sum, 1000-1)
+
+total(?sum, ?n) :: value(?sum), value(?n)
+
+total(?sum, ?n) = total(?sum+?k, ?n-1)
+  where ?k := ?n
+    if mod(?n, 3) == 0 or mod(?n, 5) == 0
+    else 0
