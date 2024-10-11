@@ -20,15 +20,16 @@
 //
 // github:kevindamm/projecteuler/golang/p001/solve.go
 
-package p001
+package p0001
 
 // Problem 001 - Multiples of 3 or 5
 // see `/blog/001` for full commentary.
 //
 // This one is pretty simple so let's see some variants.
+var SumOf3or5 = SumOf3or5_Constant
 
 // The most naive solution looks at every number in the range [1, n).
-func SumOf3or5(n int) int {
+func SumOf3or5_Naive(n int) int {
 	n = floorN(n)
 	sum := 0
 	for i := range n {
@@ -57,22 +58,21 @@ func SumOf3or5_Selective(n int) int {
 
 // An even more efficient solution doesn't look at the numbers at all
 // (except for the remainder at the end, which has a known bound).
-func Sum3or5_Constant(n int) int {
+func SumOf3or5_Constant(n int) int {
 	n = floorN(n)
 
 	k := n / 15 // integer division
 	rowcount := (5 /*3s*/ + 3 /*5s*/ - 1 /*common*/)
 	rowsum := (0 + 3 + 5 + 6 + 9 + 10 + 12)
 
-	sum := rowcount * 15 * k * (k - 1) / 2
-	sum += k * rowsum
+	sum := rowcount*15*k*(k-1)/2 + k*rowsum
 
 	// Add remaining multiples of 3 and 5.
 	delta := n - 1 - k*15
 	div3, div5 := delta/3, delta/5
-	sum += k * 15 * (div3 + div5 + 1)
-	sum += div3 * (div3 + 1) * 3 / 2
-	sum += div5 * (div5 + 1) * 5 / 2
+	sum += k*15*(div3+div5+1) +
+		div3*(div3+1)*3/2 +
+		div5*(div5+1)*5/2
 	return sum
 }
 

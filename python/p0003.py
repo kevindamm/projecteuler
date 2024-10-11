@@ -4,7 +4,7 @@ from primes import SieveOfEratosthenes
 
 def LargestPrimeFactor(n: int) -> int:
   # Build a sieve that should be big enough for the problem.
-  sieve = SieveOfEratosthenes(10**6)
+  sieve = SieveOfEratosthenes(10**5)
 
   for prime in sieve.gen_primes():
     if prime > n / 2:

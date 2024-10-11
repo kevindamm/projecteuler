@@ -18,34 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p001/solve.go
+// github:kevindamm/projecteuler/golang/p0002/solve_test.go
 
-package p001_test
+package p0002_test
 
 import (
 	"testing"
 
-	"github.com/kevindamm/projecteuler/golang/p001"
+	"github.com/kevindamm/projecteuler/golang/p0002"
 )
 
-func TestProblem001(t *testing.T) {
-	type sumof3or5 func(int) int
-
+func TestSumEvenFibonacciUntil(t *testing.T) {
 	tests := []struct {
-		name     string
-		function sumof3or5
+		name  string
+		limit int64
+		want  int64
 	}{
-		{"naive", p001.SumOf3or5},
-		{"upwards", p001.SumOf3or5_Selective},
-		{"closed", p001.Sum3or5_Constant},
+		{"small", 100, 44},
+		{"large", 1_000_000_000, 350704366},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.function(10); got != 23 {
-				t.Errorf("incorrect sum for %d, got %v", p001.ExampleN, got)
-			}
-			if got := tt.function(100_000); got != 2333316668 {
-				t.Errorf("incorrect sum for %d, got %v", 100_000, got)
+			if got := p0002.SumEvenFibonacciUntil(tt.limit); got != tt.want {
+				t.Errorf("SumEvenFibonacciUntil() = %v, want %v", got, tt.want)
 			}
 		})
 	}

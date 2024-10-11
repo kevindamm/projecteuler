@@ -14,14 +14,20 @@ export default defineConfig({
       {
         text: 'completed',
         items: [
-          { text: 'Problem 001', link: '/blog/001' }
+          { text: '001: Multiples of 3 or 5', link: '/blog/0001' }
+        ]
+      },
+      {
+        text: 'code complete',
+        items: [
+          { text: '002: Even Fibonacci Numbers', link: '/blog/0002' },
+          { text: '003: Largest Prime Factor', link: '/blog/0003' },
         ]
       },
       {
         text: 'in progress',
         items: [
-          { text: 'Problem 002', link: '/blog/002' },
-          { text: 'Problem 003', link: '/blog/003' }
+          { text: '004: Largest Palindrome Product', link: '/blog/0004' }
         ]
       }
     ],
