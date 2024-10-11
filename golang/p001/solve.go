@@ -64,7 +64,7 @@ func Sum3or5_Constant(n int) int {
 	rowcount := (5 /*3s*/ + 3 /*5s*/ - 1 /*common*/)
 	rowsum := (0 + 3 + 5 + 6 + 9 + 10 + 12)
 
-	sum := (rowcount * 15 * k * (k - 1) / 2)
+	sum := rowcount * 15 * k * (k - 1) / 2
 	sum += k * rowsum
 
 	// Add remaining multiples of 3 and 5.
