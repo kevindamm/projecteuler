@@ -14,7 +14,7 @@ export default defineConfig({
       {
         text: 'completed',
         items: [
-          { text: '001: Multiples of 3 or 5', link: '/blog/0001' }
+          { text: '0001: Multiples of 3 or 5', link: '/blog/0001' }
         ]
       },
       {

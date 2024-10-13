@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Latest
-      link: /blog/001 # https://projecteuler.kevindamm.com/
+      link: /blog/0001 # https://projecteuler.kevindamm.com/
     - theme: alt
       text: Puzzles
       link: https://projecteuler.net/archives

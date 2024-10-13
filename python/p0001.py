@@ -2,16 +2,19 @@
 
 from typing import Iterator
 
-def gen_divisors(n: int) -> Iterator[int]:
+def gen_multiples(n: int) -> Iterator[int]:
   """Generate all integers between 1..n that are divisible by either 3 or 5."""
-  for i3 in range(3,n,3):
-    yield i3
-
-  for i5 in range(5,n,15):
-    yield i5
-    if i5 + 5 < n:
-      yield i5 + 5
-    # skip each third multiple of 5.
+  i3, i5 = 3, 5
+  i = i3
+  while i < n:
+    yield i
+    if i < i3:
+      i5 += 5
+    else:
+      i3 += 3
+    i = min(i3, i5)
+    if i % 15 == 0:
+      i3 += 3
 
 if __name__ == "__main__":
-  print(sum(gen_divisors(10)))
+  print(sum(gen_multiples(100)))
