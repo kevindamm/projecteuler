@@ -125,5 +125,5 @@ func (s *sieve) set_bit(number uint64) {
 // The value above the three least significant bits determines the byte's index,
 // packing as many booleans into the allocated space as possible.
 func bitOffset(number uint64) byte {
-	return 1 << (((number - 1) >> 1) & 0x07)
+	return 1 << ((number >> 1) & 0x07)
 }
