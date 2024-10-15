@@ -1,24 +1,21 @@
 """Problem 0005 - Smallest Multiple"""
 
+from typing import List
 from typing import Mapping
 
 from primes import SieveOfEratosthenes
 
 
-def SmallestMultiple(n: int) -> int:
+def SmallestMultiple(bases: List[int]) -> int:
   factors: Mapping[int, int] = {}
-  sieve = SieveOfEratosthenes(n)
-  for i in range(2,n+1): # including n
+  sieve = SieveOfEratosthenes(max(bases[:]))
+  for i in bases: # including n
     ifactors = sieve.factors(i)
-    print(ifactors.items())
     for prime, count in ifactors.items():
       if prime not in factors:
         factors[prime] = count
       else:
         factors[prime] = max(factors[prime], count)
-
-  print("final")
-  print(factors.items())
 
   product = 1
   for prime, power in factors.items():
@@ -26,6 +23,10 @@ def SmallestMultiple(n: int) -> int:
   return product
 
 
+def _naturals_including(until: int) -> List[int]:
+  return [x for x in range(1, until+1)]
+
+
 if __name__ == "__main__":
-  print(SmallestMultiple(10))
-  # print(SmallestMultiple(20))
+  print("smallest multiple of 1..10 is " +
+        str(SmallestMultiple(_naturals_including(10))))
