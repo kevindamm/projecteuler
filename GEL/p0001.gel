@@ -1,23 +1,19 @@
-%% Problem 1 - Multiples of 3 or 5
+% Problem 1 - Multiples of 3 or 5
 
-base value(?n) :- int(?n) and ?n #> 0
+terminal :- multiple_sum(1000, ?sum)
+  ==> emit { ?sum }.
 
-terminal :- total(?sum, 1000-1)
+multiple_sum(?n, ?sum) :-
+  ?n_ is ?n - 1,
+  multiple_sum_(?n_, 0, ?sum).
 
-total(?sum, ?n) :: value(?sum), value(?n)
+multiple_sum_(?n, ?subtotal, ?sum) :-
+  multiple_sum_(?n-1, ?subtotal + value(?n), ?sum).
 
-/* Naive solution that examines all integers, unless the runtime is very smart,
- * inverting the mod constraint for the zero folding, transforming the modulus
- * into a generator so that it only iterates over valid mod-3 and mod-5 values
- * is conceivable, especially with the zero constant on the else branch.
- */
-total(?sum, ?n) = total(?sum+?k, ?n-1)
-  where ?k := ?n
-    if mod(?n, 3) == 0 or mod(?n, 5) == 0
-    else 0
+multiple_sum_(0, ?total, ?total).
 
-/*
- * Compiling this into the constant-time implementation described in the blog
- * would be truly impressive, but this is a functional form with no unbound vars
- * so it would be possible for a sufficiently intelligent compiler|interpreter.
- */
+func value(?number int #> 0) int {
+  factor = 3 or 5;
+  if mod(?number, factor) return ?number
+  else return 0
+}
