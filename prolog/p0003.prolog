@@ -8,9 +8,8 @@ max_factor_(1, _, 1).
 
 % If N is divisible by I, Max is the greater of I or largest other factor.
 max_factor_(N, I, Max) :-
-  0 is N mod I,
+  divmod(N, I, Q, 0),
   !,
-  Q is N div I,
   max_factor_(Q, I, OtherMax),
   Max is max(I, OtherMax).
 
@@ -21,5 +20,6 @@ max_factor_(N, I, Max) :-
 
 
 main :-
+  factor_max_prime(13195, 29),
   factor_max_prime(600851475143, Max),
   write(Max).
