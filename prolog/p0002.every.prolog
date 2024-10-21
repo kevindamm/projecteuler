@@ -1,10 +1,8 @@
-% Problem 2 - Even Fibonacci Numbers
-
-%% Sum is the sum of every *even* fibonacci number up to and including N.
+% Sum is the sum of every *even* fibonacci number up to and including N.
 fib_even_sum(N, Sum) :-
   fib_even_sum(N, 1, 1, 0, Sum).
 
-%% If less than limit and even, include the term in the sum.
+% If B is less than limit and even, include the term in the sum.
 fib_even_sum(Limit, A, B, Acc, Sum) :-
   Limit >= B, B mod 2 =:= 0,
   !,
@@ -12,14 +10,14 @@ fib_even_sum(Limit, A, B, Acc, Sum) :-
   NextAcc is Acc + B,
   fib_even_sum(Limit, B, Next, NextAcc, Sum).
 
-%% Otherwise, find the next fibonacci number without updating the sum.
+% Otherwise, find the next fibonacci number without updating the sum.
 fib_even_sum(Limit, A, B, Acc, Sum) :-
   Limit >= B,
   Next is A + B,
   fib_even_sum(Limit, B, Next, Acc, Sum).
 
-%% Base case, Sum is total accumulated.
-fib_even_sum(Limit, A, B, Acc, Sum) :- B > Limit.
+% Base case, Sum is accumulated from total.
+fib_even_sum(Limit, _, B, Total, Total) :- B > Limit.
 
 
 main :-

@@ -1,5 +1,3 @@
-% Problem 2 - Even Fibonacci Numbers
-
 % Sum is the sum of every *even* fibonacci number up to and including N.
 fib_even_sum(N, Sum) :-
   fib_even_sum(N, 1, 2, 0, Sum).
@@ -14,7 +12,7 @@ fib_even_sum(Limit, A, B, Acc, Sum) :-
   fib_even_sum(Limit, NextA, NextB, NextAcc, Sum).
 
 % Base case, Sum is the total accumulated.
-fib_even_sum(Limit, A, B, Acc, Acc) :- B > Limit.
+fib_even_sum(Limit, _, B, Acc, Acc) :- B > Limit.
 
 
 main :-
