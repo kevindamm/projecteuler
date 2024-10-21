@@ -31,18 +31,21 @@ var SumOf3or5 = SumOf3or5_Constant
 // The most naive solution looks at every number in the range [1, n).
 func SumOf3or5_Naive(n int) int {
 	n = floorN(n)
+	// #region naive
 	sum := 0
 	for i := range n {
 		if i%3 == 0 || i%5 == 0 {
 			sum += i
 		}
 	}
+	// #endregion naive
 	return sum
 }
 
 // A more selective approach only looks at the numbers we know to be multiples.
 func SumOf3or5_Selective(n int) int {
 	n = floorN(n)
+	// #region selection
 	sum := 0
 	for i := 3; i < n; i += 3 {
 		sum += i
@@ -53,6 +56,7 @@ func SumOf3or5_Selective(n int) int {
 			sum += j + 5
 		}
 	}
+	// #endregion selection
 	return sum
 }
 

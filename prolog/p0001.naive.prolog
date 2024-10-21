@@ -1,13 +1,11 @@
-% Problem 0001 - Multilpes of 3 or 5
-
-%% Solves for Sum in terms of N.
+% Sum is the sum of multiples of {3, 5} below N.
 sum_multiples(N, Sum) :-
   sum_multiples_naive(N-1, 0, Sum).
 
-%% Base case for recursion, sum matches total accumulated.
+% Base case, Sum is total accumulated when N is 0.
 sum_multiples_naive(0, Acc, Acc).
 
-%% Iterates through all of the integers, accumulating N if it is divisible.
+% Sum is accumulated for all values > 0 divisible by 3 or 5.
 sum_multiples_naive(N, Acc, Sum) :-
   N > 0, (N mod 3 =:= 0 ; N mod 5 =:= 0),
   !,
@@ -15,13 +13,12 @@ sum_multiples_naive(N, Acc, Sum) :-
   Nminus is N - 1,
   sum_multiples_naive(Nminus, NewAcc, Sum).
 
-%% This rule matches when N is not divisible by 3 nor by 5,
-%% (similar to the loop no-ops in naive procedural implementations)
-%% necessary to satisfy the topmost clause to make everything true.
+% Rule for carrying accumulated value on non-divisible values.
 sum_multiples_naive(N, Acc, Sum) :-
   N > 0,
   Nminus is N - 1,
   sum_multiples_naive(Nminus, Acc, Sum).
+
 
 main :-
   sum_multiples(1000, Sum),
