@@ -2,10 +2,21 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Project Euler solutions",
-  description: "Exploring various problems from the wonderful math puzzle site [Project Euler](https://projecteuler.net)",
+  title: 'Project Euler solutions',
+  description: 'Exploring various problems from the wonderful math puzzle site [Project Euler](https://projecteuler.net)',
+  
+  sitemap: {
+    hostname: 'https://projecteuler.kevindamm.com',
+    transformItems: (items) => {
+      items.map((item) => {
+        if (item.changefreq && item.changefreq != 'weekly') {
+          item.changefreq = 'weekly'
+        }})
+      return items
+    }
+  },
+
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
     ],
