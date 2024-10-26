@@ -18,29 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0003/solve_test.go
+// github:kevindamm/projecteuler/golang/main.go
 
-package p0003
-
-import (
-	"testing"
-)
-
-func TestLargestPrimeFactor(t *testing.T) {
-	tests := []struct {
-		name  string
-		input uint64
-		want  int
-	}{
-		{"small", uint64(13195), 29},
-		{"easy, many 2s", uint64(6144), 3},
-		{"large", uint64(7777777770000), 333667},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := LargestPrimeFactor(tt.input); got != tt.want {
-				t.Errorf("LargestPrimeFactor() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+package main

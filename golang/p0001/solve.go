@@ -29,7 +29,7 @@ package p0001
 var SumOf3or5 = SumOf3or5_Constant
 
 // The most naive solution looks at every number in the range [1, n).
-func SumOf3or5_Naive(n int) int {
+func SumOf3or5_Naïve(n int) int {
 	n = floorN(n)
 	// #region naive
 	sum := 0

@@ -24,8 +24,8 @@ package p0002
 
 // Problem 2 - Even Fibonacci Numbers
 
-func SumEvenFibonacciUntil(n int64) int64 {
-	sum := int64(0)
+func SumEvenFibonacciUntil(n int) int {
+	sum := int(0)
 	for fibn := range fibonacci(n) {
 		if fibn&1 == 0 {
 			sum += fibn
@@ -34,14 +34,14 @@ func SumEvenFibonacciUntil(n int64) int64 {
 	return sum
 }
 
-func fibonacci(limit int64) <-chan int64 {
+func fibonacci(limit int) <-chan int {
 	if limit <= 0 {
 		return nil
 	}
 
-	fibs := make(chan int64)
+	fibs := make(chan int)
 	go func() {
-		var i, j int64 = 1, 2
+		var i, j int = 1, 2
 		fibs <- 1
 		defer close(fibs)
 

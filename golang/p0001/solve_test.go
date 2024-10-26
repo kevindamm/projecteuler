@@ -36,7 +36,7 @@ func TestProblem001(t *testing.T) {
 		function sumof3or5
 	}{
 		{"default", p0001.SumOf3or5},
-		{"naive", p0001.SumOf3or5_Naive},
+		{"naive", p0001.SumOf3or5_Naïve},
 		{"upwards", p0001.SumOf3or5_Selective},
 		{"closed", p0001.SumOf3or5_Constant},
 	}
