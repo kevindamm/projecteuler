@@ -23,7 +23,6 @@
 package main_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/kevindamm/projecteuler/golang/p0001"
@@ -33,74 +32,55 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0005"
 )
 
-type SolutionContext struct {
-	Util map[string]any
-}
-
-func no_init() *SolutionContext {
-	return nil
-}
-
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
-		name string
-		init func() *SolutionContext
-		test func(*testing.T, *SolutionContext) error
+		name   string
+		test   func(int) int
+		expect map[int]int
 	}{
 		{"p0001",
-			no_init,
-			Answers(p0001.SumOf3or5, map[int]int{
+			p0001.SumOf3or5,
+			map[int]int{
 				10:      23,
 				100_000: 2333316668,
-			}),
+			},
 		},
 		{"p0002",
-			no_init,
-			Answers(p0002.SumEvenFibonacciUntil, map[int]int{
+			p0002.SumEvenFibonacciUntil,
+			map[int]int{
 				100:           44,
 				1_000_000_000: 350704366,
-			}),
+			},
 		},
 		{"p0003",
-			no_init,
-			Answers(p0003.LargestPrimeFactor, map[int]int{
+			p0003.LargestPrimeFactor,
+			map[int]int{
 				13195:         29,
 				6144:          3,
 				7777777770000: 333667,
-			}),
+			},
 		},
 		{"p0004",
-			no_init,
-			Answers(p0004.FindLargestPalindromeProduct, map[int]int{
+			p0004.FindLargestPalindromeProduct,
+			map[int]int{
 				100:   9009,
 				10000: 99000099, // 5 seconds
-			}),
+			},
 		},
 		{"p0005",
-			no_init,
-			Answers(p0005.SmallestCommonMultiple, map[int]int{
+			p0005.SmallestCommonMultiple,
+			map[int]int{
 				10: 2520,
-			}),
+			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ctx := tt.init()
-			if err := tt.test(t, ctx); err != nil {
-				t.Errorf("test %s err: %v", tt.name, err)
+			for arg, ans := range tt.expect {
+				if result := tt.test(arg); result != ans {
+					t.Errorf("test %s expect: %d got: %d", tt.name, ans, result)
+				}
 			}
 		})
-	}
-}
-
-func Answers(test func(int) int, answers map[int]int) func(t *testing.T, ctx *SolutionContext) error {
-	return func(t *testing.T, ctx *SolutionContext) error {
-		for q, expected := range answers {
-			answer := test(q)
-			if answer != expected {
-				return fmt.Errorf("expected %d but got %d", expected, answer)
-			}
-		}
-		return nil
 	}
 }
