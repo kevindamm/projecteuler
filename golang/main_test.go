@@ -30,6 +30,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0002"
 	"github.com/kevindamm/projecteuler/golang/p0003"
 	"github.com/kevindamm/projecteuler/golang/p0004"
+	"github.com/kevindamm/projecteuler/golang/p0005"
 )
 
 type SolutionContext struct {
@@ -73,6 +74,12 @@ func TestAllProblems(t *testing.T) {
 			Answers(p0004.FindLargestPalindromeProduct, map[int]int{
 				100:   9009,
 				10000: 99000099, // 5 seconds
+			}),
+		},
+		{"p0005",
+			no_init,
+			Answers(p0005.SmallestCommonMultiple, map[int]int{
+				10: 2520,
 			}),
 		},
 	}
