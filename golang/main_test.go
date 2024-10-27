@@ -7,8 +7,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -30,6 +30,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0003"
 	"github.com/kevindamm/projecteuler/golang/p0004"
 	"github.com/kevindamm/projecteuler/golang/p0005"
+	"github.com/kevindamm/projecteuler/golang/p0006"
 )
 
 func TestAllProblems(t *testing.T) {
@@ -44,6 +45,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0003", p0003.LargestPrimeFactor, 13195, 29},
 		{"p0004", p0004.FindLargestPalindromeProduct, 100, 9009},
 		{"p0005", p0005.SmallestCommonMultiple, 10, 2520},
+		{"p0006", p0006.SqSumDifference, 10, 2640},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
