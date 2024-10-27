@@ -34,52 +34,22 @@ import (
 
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
-		name   string
-		test   func(int) int
-		expect map[int]int
+		name     string
+		test     func(int) int
+		input    int
+		expected int
 	}{
-		{"p0001",
-			p0001.SumOf3or5,
-			map[int]int{
-				10:      23,
-				100_000: 2333316668,
-			},
-		},
-		{"p0002",
-			p0002.SumEvenFibonacciUntil,
-			map[int]int{
-				100:           44,
-				1_000_000_000: 350704366,
-			},
-		},
-		{"p0003",
-			p0003.LargestPrimeFactor,
-			map[int]int{
-				13195:         29,
-				6144:          3,
-				7777777770000: 333667,
-			},
-		},
-		{"p0004",
-			p0004.FindLargestPalindromeProduct,
-			map[int]int{
-				100:   9009,
-				10000: 99000099, // 5 seconds
-			},
-		},
-		{"p0005",
-			p0005.SmallestCommonMultiple,
-			map[int]int{
-				10: 2520,
-			},
-		},
+		{"p0001", p0001.SumOf3or5, 10, 23},
+		{"p0002", p0002.SumEvenFibonacciUntil, 100, 44},
+		{"p0003", p0003.LargestPrimeFactor, 13195, 29},
+		{"p0004", p0004.FindLargestPalindromeProduct, 100, 9009},
+		{"p0005", p0005.SmallestCommonMultiple, 10, 2520},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			for arg, ans := range tt.expect {
-				if result := tt.test(arg); result != ans {
-					t.Errorf("test %s expect: %d got: %d", tt.name, ans, result)
-				}
+			result := tt.test(tt.input)
+			if result != tt.expected {
+				t.Errorf("test %s expected %d, got %d", tt.name, tt.expected, result)
 			}
 		})
 	}

@@ -18,56 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/util/primes_test.go
+// github:kevindamm/projecteuler/golang/p0006/solve.go
 
-package util
-
-import (
-	"testing"
-)
-
-func TestSieveSmall(t *testing.T) {
-	tests := []struct {
-		name  string
-		input uint64
-		want  bool
-	}{
-		{"1", 1, false},
-		{"3", 3, true},
-		{"5", 5, true},
-		{"7", 7, true},
-		{"9", 9, false},
-		{"11", 11, true},
-		{"13", 13, true},
-		{"15", 15, false},
-	}
-	sieve := NewSieve(15)
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if sieve.IsPrime(tt.input) != tt.want {
-				t.Errorf("%s expected %v", tt.name, tt.want)
-			}
-		})
-	}
-}
-
-func TestSieveLarge(t *testing.T) {
-	tests := []struct {
-		name  string
-		input uint64
-		want  bool
-	}{
-		{"37337 prime", 37337, true},
-		{"60516 not prime", 60516, false},
-		{"69337 prime", 69337, true},
-		{"333667 prime", 333667, true},
-	}
-	sieve := NewSieve(1 << 20)
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if sieve.IsPrime(tt.input) != tt.want {
-				t.Errorf("%s expected %v", tt.name, tt.want)
-			}
-		})
-	}
-}
+package p0006
