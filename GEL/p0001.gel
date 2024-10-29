@@ -1,19 +1,19 @@
 % Problem 1 - Multiples of 3 or 5
 
-terminal :- multiple_sum(1000, ?sum)
-  ==> emit { ?sum }.
+terminal :- multiple_sum(1000) = ?sum
+  ==> emit ?sum.
 
-multiple_sum(?n, ?sum) :-
+multiple_sum(?n) = ?sum :-
   ?n_ is ?n - 1,
-  multiple_sum_(?n_, 0, ?sum).
+  multiple_sum_(?n_, 0) = ?sum.
 
-multiple_sum_(?n, ?subtotal, ?sum) :-
-  multiple_sum_(?n-1, ?subtotal + value(?n), ?sum).
+multiple_sum_(?n, ?subtotal) = ?sum :-
+  multiple_sum_(?n-1, ?subtotal + value(?n)) = ?sum.
 
-multiple_sum_(0, ?total, ?total).
+multiple_sum_(0, ?total) = ?total.
 
+% The parameter constraint here helps direct a bounded search.
 func value(?number int #> 0) int {
-  factor = 3 or 5;
-  if mod(?number, factor) return ?number
-  else return 0
-}
+  let factor in {3, 5},
+  return ?number if mod(?number, factor) == 0.
+} else 0.
