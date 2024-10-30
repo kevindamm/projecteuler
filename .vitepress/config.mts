@@ -1,3 +1,4 @@
+import footnote from 'markdown-it-footnote'
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -35,6 +36,7 @@ export default defineConfig({
           { text: '0003: Largest Prime Factor', link: '/blog/0003' },
           { text: '0004: Largest Palindrome Product', link: '/blog/0004' },
           { text: '0005: Smallest Multiple', link: '/blog/0005' },
+          { text: '0006: Sum Square Difference', link: '/blog/0006' },
           { text: '0007: 10001st Prime', link: '/blog/0007' },
         ]
       },
@@ -47,10 +49,18 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kevindamm/projecteuler' }
-    ]
+    ],
+
+    footer: {
+      message: 'Problems from the math puzzle site [Project Euler](https://projecteuler.net) are licensed under a Creative Commons (CC) License\n\n`Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)`',
+      copyright: 'Copyright (c) 2024 Kevin Damm - MIT licensed source code'
+    }
   },
 
   markdown: {
-    math: true
+    math: true,
+    config: (md) => {
+      md.use(footnote)
+    }
   }
 })
