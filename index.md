@@ -1,20 +1,27 @@
 ---
 layout: home
-title: " "
+title: "v(alpha)"
 
 hero:
-  name: "Project Euler solutions"
-  tagline: "with commentary by\nKevin Damm"
+  name: "Project Euler analysis"
+  tagline: "in forming form from informing"
   actions:
     - theme: brand
-      text: Latest
-      link: /blog/0001 # https://projecteuler.kevindamm.com/
+      text: goto Latest
+      link: /blog/0001 # https://projecteuler.kevindamm.com/latest
     - theme: alt
-      text: Puzzles
+      text: (original)
       link: https://projecteuler.net/archives
     - theme: alt
-      text: GitHub
+      text: site GitHub
       link: https://github.com/kevindamm/projecteuler
 ---
 
-Exploring various problems from the wonderful math puzzle site [Project Euler](https://projecteuler.net)
+
+
+
+Problems from the math puzzle site [Project Euler](https://projecteuler.net)
+are licensed under a Creative Commons (CC) License
+
+`Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)`
+
