@@ -31,6 +31,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0004"
 	"github.com/kevindamm/projecteuler/golang/p0005"
 	"github.com/kevindamm/projecteuler/golang/p0006"
+	"github.com/kevindamm/projecteuler/golang/p0007"
 )
 
 func TestAllProblems(t *testing.T) {
@@ -46,6 +47,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0004", p0004.FindLargestPalindromeProduct, 100, 9009},
 		{"p0005", p0005.SmallestCommonMultiple, 10, 2520},
 		{"p0006", p0006.SqSumDifference, 10, 2640},
+		{"p0007", p0007.NthPrime, 6, 13},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
