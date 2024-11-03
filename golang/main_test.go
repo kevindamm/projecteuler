@@ -39,9 +39,9 @@ import (
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
 		name     string
-		test     func(int) int
+		test     func(int) int64
 		input    int
-		expected int
+		expected int64
 	}{
 		{"p0001", p0001.SumOf3or5, 10, 23},
 		{"p0002", p0002.SumEvenFibonacciUntil, 100, 44},
