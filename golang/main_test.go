@@ -33,6 +33,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0006"
 	"github.com/kevindamm/projecteuler/golang/p0007"
 	"github.com/kevindamm/projecteuler/golang/p0008"
+	"github.com/kevindamm/projecteuler/golang/p0009"
 )
 
 func TestAllProblems(t *testing.T) {
@@ -50,6 +51,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0006", p0006.SqSumDifference, 10, 2640},
 		{"p0007", p0007.NthPrime, 6, 13},
 		{"p0008", p0008.DigitSeries("../data/0008_digits.txt").LargestAdjacentProduct, 4, 5832},
+		{"p0009", p0009.SpecialPythagoreanTriplet, 1000, 60},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
