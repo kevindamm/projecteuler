@@ -34,14 +34,15 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0007"
 	"github.com/kevindamm/projecteuler/golang/p0008"
 	"github.com/kevindamm/projecteuler/golang/p0009"
+	"github.com/kevindamm/projecteuler/golang/p0010"
 )
 
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
 		name     string
-		test     func(int) int64
+		test     func(int) int
 		input    int
-		expected int64
+		expected int
 	}{
 		{"p0001", p0001.SumOf3or5, 10, 23},
 		{"p0002", p0002.SumEvenFibonacciUntil, 100, 44},
@@ -51,7 +52,8 @@ func TestAllProblems(t *testing.T) {
 		{"p0006", p0006.SqSumDifference, 10, 2640},
 		{"p0007", p0007.NthPrime, 6, 13},
 		{"p0008", p0008.DigitSeries("../data/0008_digits.txt").LargestAdjacentProduct, 4, 5832},
-		{"p0009", p0009.SpecialPythagoreanTriplet, 1000, 60},
+		{"p0009", p0009.SpecialPythagoreanTriplet, 12, 60},
+		{"p0010", p0010.SummationOfPrimesBelow, 10, 17},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
