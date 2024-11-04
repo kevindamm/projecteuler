@@ -35,6 +35,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0008"
 	"github.com/kevindamm/projecteuler/golang/p0009"
 	"github.com/kevindamm/projecteuler/golang/p0010"
+	"github.com/kevindamm/projecteuler/golang/p0011"
 )
 
 func TestAllProblems(t *testing.T) {
@@ -54,6 +55,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0008", p0008.DigitSeries("../data/0008_digits.txt").LargestAdjacentProduct, 4, 5832},
 		{"p0009", p0009.SpecialPythagoreanTriplet, 12, 60},
 		{"p0010", p0010.SummationOfPrimesBelow, 10, 17},
+		{"p0011", p0011.NumberGrid("../data/0011_grid.txt").GreatestProductOfAdjacent, 2, 9306},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
