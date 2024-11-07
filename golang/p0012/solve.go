@@ -59,7 +59,7 @@ func FirstTriangleExceedingFactorCount(count_limit int) int {
 		}
 
 		for number := range triangle_numbers(size) {
-			if factor_count[number] == count_limit {
+			if factor_count[number] >= count_limit {
 				return number
 			}
 		}
