@@ -82,9 +82,28 @@ def numbercount(number: int) -> int:
 def NumberLetterCounts(limit: int) -> int:
   return sum(numbercount(number) for number in range(1,limit+1))
 
+def QuickNumberCountToThousand() -> int:
+  total = 0
+  for i in range(1,20):
+    total += digitlen[i]
+
+  tencount = sum(length for length in digitlen[1:10])
+  total += 8 * tencount # two through nine within each tens group
+  total += sum(10*tenlen[i] for i in range(2,10)) # tens name length
+
+  hundredcount = total
+  total += sum(digitlen[i] + len("hundred") for i in range(1,10))
+  total += sum(99 * (digitlen[i] + len("hundred") + len("and")) for i in range(1, 10))
+  total += 9 * hundredcount
+
+  total += len("one") + len("thousand")
+  return total
+
+
 if __name__ == "__main__":
   assert NumberLetterCounts(5) == 19
   assert numbercount(342) == 23
   assert numbercount(115) == 20
 
-  print(NumberLetterCounts(1000))
+  # print(NumberLetterCounts(1000))
+  print(QuickNumberCountToThousand())
