@@ -4,7 +4,7 @@ title: "v(alpha)"
 
 hero:
   name: "Project Euler analysis"
-  tagline: "in forming form from informing"
+  tagline: "in forming informing form from function"
   actions:
     - theme: brand
       text: goto Latest
