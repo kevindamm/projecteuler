@@ -52,7 +52,6 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'Problems from the math puzzle site [Project Euler](https://projecteuler.net) are licensed under a Creative Commons (CC) License\n\n`Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)`',
       copyright: 'Copyright (c) 2024 Kevin Damm - MIT licensed source code'
     }
   },

@@ -1,19 +1,43 @@
-% Problem 1 - Multiples of 3 or 5
+@title Problem 1 - Multiples of 3 or 5
+@author Kevin Damm
 
-terminal :- multiple_sum(1000) = ?sum
-  ==> emit ?sum.
+terminal :-
+  multiple_sum(1000) = ?sum
+  ==> emit ?sum
 
-multiple_sum(?n) = ?sum :-
-  ?n_ is ?n - 1,
-  multiple_sum_(?n_, 0) = ?sum.
+// More efficient approach, the sum is computed by only including values already
+// known to be multiples of 3 or 5.  However, it still looks at every individual
+// qualifying number consecutively, and has to discount the double-added values.
+multiple_sum(?n: int #> 0) = ?sum :-
+  sum_by(3, ?n) = ?sum3,
+  sum_by(5, ?n) = ?sum5,
+  sum_by(15, ?n) = ?sum15,
+  ?sum is ?sum3 + ?sum5 - ?sum15
 
-multiple_sum_(?n, ?subtotal) = ?sum :-
-  multiple_sum_(?n-1, ?subtotal + value(?n)) = ?sum.
 
-multiple_sum_(0, ?total) = ?total.
+sum_by(?inc, ?n) = ?sum :-
+  sum_by_(?inc, ?n, 0, 0) = ?sum
 
-% The parameter constraint here helps direct a bounded search.
-func value(?number int #> 0) int {
-  let factor in {3, 5},
-  return ?number if mod(?number, factor) == 0.
-} else 0.
+sum_by(?inc, ?n, ?i, ?accum) = ?sum :-
+  ?i #< ?n,
+  sum_by(?inc, ?n, ?i + ?inc, ?accum + ?i) = ?sum
+
+sum_by(_, ?n, ?i, ?accum) = ?accum :-
+  ?i #>= ?n
+
+
+// Naive solution, looks at every number.
+// multiple_sum(?n) = ?sum :- multiple_seq(?n-1, 0) = ?sum
+
+multiple_seq(?n, ?subtotal) = ?sum :-
+  multiple_seq(?n-1, ?subtotal + #contribute(?n)) = ?sum
+
+multiple_seq(0, ?total) = ?total
+
+#contribute(?number: int #> 0) => {
+  ?factor in {3, 5}
+  multiple :- mod(?number, ?factor) #= 0
+
+  return ?number :- multiple
+  return 0 :- not multiple
+}
