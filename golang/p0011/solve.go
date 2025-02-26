@@ -29,35 +29,6 @@ import (
 	"strings"
 )
 
-func NumberGrid(filename string) number_grid {
-	grid := make([][]int, 0)
-	reader, err := os.Open(filename)
-	if err != nil {
-		return nil
-	}
-	defer reader.Close()
-	scanner := bufio.NewScanner(reader)
-	scanner.Split(bufio.ScanLines)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-		line_numbers := make([]int, 0)
-		for _, nstr := range strings.Split(line, " ") {
-			if strings.Trim(nstr, " ") == "" {
-				continue
-			}
-			number, err := strconv.Atoi(nstr)
-			if err != nil {
-				return nil
-			}
-			line_numbers = append(line_numbers, number)
-		}
-		grid = append(grid, line_numbers)
-	}
-
-	return number_grid(grid)
-}
-
 type number_grid [][]int
 
 func (grid number_grid) GreatestProductOfAdjacent(length int) int {
@@ -104,4 +75,33 @@ func (grid number_grid) GreatestProductOfAdjacent(length int) int {
 		}
 	}
 	return largest
+}
+
+func NumberGridFile(filename string) number_grid {
+	grid := make([][]int, 0)
+	reader, err := os.Open(filename)
+	if err != nil {
+		return nil
+	}
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	scanner.Split(bufio.ScanLines)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		line_numbers := make([]int, 0)
+		for _, nstr := range strings.Split(line, " ") {
+			if strings.Trim(nstr, " ") == "" {
+				continue
+			}
+			number, err := strconv.Atoi(nstr)
+			if err != nil {
+				return nil
+			}
+			line_numbers = append(line_numbers, number)
+		}
+		grid = append(grid, line_numbers)
+	}
+
+	return number_grid(grid)
 }

@@ -24,7 +24,6 @@ package p0013
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"math/big"
 	"os"
@@ -32,9 +31,22 @@ import (
 	"strings"
 )
 
+// The list of numbers read from
 type bignum_list []*big.Int
 
-func NumberList(digits_file string) bignum_list {
+func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
+	bigSum := big.NewInt(0)
+	for _, number := range numbers {
+		bigSum = bigSum.Add(bigSum, number)
+	}
+
+	digitStr := bigSum.String()
+	length := min(num_digits, len(digitStr))
+	digits, _ := strconv.Atoi(digitStr[:length])
+	return digits
+}
+
+func NumberListFile(digits_file string) bignum_list {
 	numbers := make([]*big.Int, 0)
 	reader, err := os.Open(digits_file)
 	if err != nil {
@@ -52,29 +64,9 @@ func NumberList(digits_file string) bignum_list {
 		number := new(big.Int)
 		number, ok := number.SetString(line, 10)
 		if !ok {
-			fmt.Print("not ok")
-			return nil
+			log.Fatalf("file contains invalid line %s, expected numbers", line)
 		}
-		fmt.Println(number.String())
 		numbers = append(numbers, number)
 	}
 	return numbers
-}
-
-func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
-	bigSum := big.NewInt(0)
-	for _, number := range numbers {
-		bigSum = bigSum.Add(bigSum, number)
-	}
-
-	digitStr := bigSum.String()
-	l := num_digits
-	if len(digitStr) < num_digits {
-		l = len(digitStr)
-	}
-	digits, err := strconv.Atoi(digitStr[:l])
-	if err != nil {
-		log.Fatal(err)
-	}
-	return digits
 }
