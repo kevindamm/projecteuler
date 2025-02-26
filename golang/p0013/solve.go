@@ -24,6 +24,7 @@ package p0013
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math/big"
 	"os"
@@ -34,7 +35,7 @@ import (
 type bignum_list []*big.Int
 
 func NumberList(digits_file string) bignum_list {
-	numbers := make([]*big.Int, 100)
+	numbers := make([]*big.Int, 0)
 	reader, err := os.Open(digits_file)
 	if err != nil {
 		return nil
@@ -51,8 +52,10 @@ func NumberList(digits_file string) bignum_list {
 		number := new(big.Int)
 		number, ok := number.SetString(line, 10)
 		if !ok {
+			fmt.Print("not ok")
 			return nil
 		}
+		fmt.Println(number.String())
 		numbers = append(numbers, number)
 	}
 	return numbers
@@ -65,8 +68,8 @@ func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
 	}
 
 	digitStr := bigSum.String()
-	l := 10
-	if len(digitStr) < 10 {
+	l := num_digits
+	if len(digitStr) < num_digits {
 		l = len(digitStr)
 	}
 	digits, err := strconv.Atoi(digitStr[:l])

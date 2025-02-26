@@ -59,7 +59,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0010", p0010.SummationOfPrimesBelow, 10, 17},
 		{"p0011", p0011.NumberGrid("../data/0011_grid.txt").GreatestProductOfAdjacent, 2, 9306},
 		{"p0012", p0012.FirstTriangleExceedingFactorCount, 5, 28},
-		{"p0013", p0013.NumberList("../data/0013_numbers.txt").LargeSumLeadingDigits, 10, 123},
+		{"p0013", p0013.NumberList("../data/0013_numbers.txt").LargeSumLeadingDigits, 2, 55},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
