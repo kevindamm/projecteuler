@@ -31,7 +31,7 @@ import (
 
 type number_grid [][]int
 
-func (grid number_grid) GreatestProductOfAdjacent(length int) int {
+func (grid number_grid) GreatestProductOfAdjacent(length int) int64 {
 	largest, product := 0, 0
 	height, width := len(grid), len(grid[0])
 	for i := range height {
@@ -74,7 +74,7 @@ func (grid number_grid) GreatestProductOfAdjacent(length int) int {
 			}
 		}
 	}
-	return largest
+	return int64(largest)
 }
 
 func NumberGridFile(filename string) number_grid {

@@ -24,11 +24,11 @@ package p0010
 
 import "github.com/kevindamm/projecteuler/golang/util"
 
-func SummationOfPrimesBelow(n int) int {
+func SummationOfPrimesBelow(n int) int64 {
 	sum := 0
 
 	for prime := range util.GeneratePrimesUntil(uint64(n)) {
 		sum += int(prime)
 	}
-	return sum
+	return int64(sum)
 }

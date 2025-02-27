@@ -23,7 +23,7 @@
 package p0014
 
 // Returns the start of the longest sequence, for any start value below `limit`.
-func LongestCollatzChainStartingBelow(limit int) int {
+func LongestCollatzChainStartingBelow(limit int) int64 {
 	longest, answer := 0, 0
 	cg := make(collatz_graph, 2*limit)
 	cg[0] = 0
@@ -37,7 +37,7 @@ func LongestCollatzChainStartingBelow(limit int) int {
 			answer = i
 		}
 	}
-	return answer
+	return int64(answer)
 }
 
 // The entire data structure is a mapping of input -> length.  It can be used
@@ -83,6 +83,10 @@ func (graph collatz_graph) CollatzLength(x int) int {
 	return length
 }
 
+// Compute the next number in the sequence, where
+//    if x is even, x' = x/2
+//    if x is odd,  x' = 3*x + 1
+// This is famously known as the Collatz Sequence.
 func CollatzNext(x int) int {
 	if x&1 == 0 {
 		return x >> 1

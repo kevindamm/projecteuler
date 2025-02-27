@@ -39,14 +39,15 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0012"
 	"github.com/kevindamm/projecteuler/golang/p0013"
 	"github.com/kevindamm/projecteuler/golang/p0014"
+	"github.com/kevindamm/projecteuler/golang/p0015"
 )
 
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
 		name     string
-		test     func(int) int
+		test     func(int) int64
 		input    int
-		expected int
+		expected int64
 	}{
 		{"p0001", p0001.SumOf3or5, 10, 23},
 		{"p0002", p0002.SumEvenFibonacciUntil, 100, 44},
@@ -65,6 +66,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0013", p0013.NumberListFile("../data/0013_numbers.txt").
 			LargeSumLeadingDigits, 1, 5},
 		{"p0014", p0014.LongestCollatzChainStartingBelow, 100, 97},
+		{"p0015", p0015.CountSquareLatticePaths, 2, 6},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

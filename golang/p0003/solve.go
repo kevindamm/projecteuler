@@ -24,16 +24,16 @@ package p0003
 
 import "github.com/kevindamm/projecteuler/golang/util"
 
-func LargestPrimeFactor(n int) int {
+func LargestPrimeFactor(n int) int64 {
 	var reduced = uint64(n)
 	for prime := range util.GeneratePrimesUntil(1 << 20) {
 		if prime > reduced>>1 {
-			return int(reduced)
+			return int64(reduced)
 		}
 		for reduced%prime == 0 {
 			reduced /= prime
 		}
 	}
 
-	return int(reduced)
+	return int64(reduced)
 }

@@ -26,7 +26,7 @@ import "os"
 
 type digit_series []int
 
-func (series digit_series) LargestAdjacentProduct(length int) int {
+func (series digit_series) LargestAdjacentProduct(length int) int64 {
 	largest := 0
 
 	for seq := range series.SequencesOf(length) {
@@ -39,7 +39,7 @@ func (series digit_series) LargestAdjacentProduct(length int) int {
 		}
 	}
 
-	return largest
+	return int64(largest)
 }
 
 func (series digit_series) SequencesOf(length int) <-chan []int {

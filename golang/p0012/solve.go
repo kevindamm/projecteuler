@@ -39,7 +39,7 @@ func triangle_numbers(size int) <-chan int {
 	return intchan
 }
 
-func FirstTriangleExceedingFactorCount(count_limit int) int {
+func FirstTriangleExceedingFactorCount(count_limit int) int64 {
 	for i := range 3 {
 		digits := i + 7
 		size := 1 << (digits*10/3 + 1)
@@ -60,7 +60,7 @@ func FirstTriangleExceedingFactorCount(count_limit int) int {
 
 		for number := range triangle_numbers(size) {
 			if factor_count[number] >= count_limit {
-				return number
+				return int64(number)
 			}
 		}
 	}

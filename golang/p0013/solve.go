@@ -34,7 +34,7 @@ import (
 // The list of numbers read from
 type bignum_list []*big.Int
 
-func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
+func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int64 {
 	bigSum := big.NewInt(0)
 	for _, number := range numbers {
 		bigSum = bigSum.Add(bigSum, number)
@@ -43,7 +43,7 @@ func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
 	digitStr := bigSum.String()
 	length := min(num_digits, len(digitStr))
 	digits, _ := strconv.Atoi(digitStr[:length])
-	return digits
+	return int64(digits)
 }
 
 func NumberListFile(digits_file string) bignum_list {

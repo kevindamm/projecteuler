@@ -29,7 +29,7 @@ package p0001
 var SumOf3or5 = SumOf3or5_Constant
 
 // The most naive solution looks at every number in the range [1, n).
-func SumOf3or5_Naïve(n int) int {
+func SumOf3or5_Naïve(n int) int64 {
 	n = floorN(n)
 	// #region naive
 	sum := 0
@@ -39,11 +39,11 @@ func SumOf3or5_Naïve(n int) int {
 		}
 	}
 	// #endregion naive
-	return sum
+	return int64(sum)
 }
 
 // A more selective approach only looks at the numbers we know to be multiples.
-func SumOf3or5_Selective(n int) int {
+func SumOf3or5_Selective(n int) int64 {
 	n = floorN(n)
 	// #region selection
 	sum := 0
@@ -57,12 +57,12 @@ func SumOf3or5_Selective(n int) int {
 		}
 	}
 	// #endregion selection
-	return sum
+	return int64(sum)
 }
 
 // An even more efficient solution doesn't look at the numbers at all
 // (except for the remainder at the end, which has a known bound).
-func SumOf3or5_Constant(n int) int {
+func SumOf3or5_Constant(n int) int64 {
 	n = floorN(n)
 
 	k := n / 15 // integer division
@@ -77,7 +77,7 @@ func SumOf3or5_Constant(n int) int {
 	sum += k*15*(div3+div5+1) +
 		div3*(div3+1)*3/2 +
 		div5*(div5+1)*5/2
-	return sum
+	return int64(sum)
 }
 
 const ExampleN = 10
