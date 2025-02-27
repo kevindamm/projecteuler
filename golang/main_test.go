@@ -38,14 +38,16 @@ import (
 	"github.com/kevindamm/projecteuler/golang/p0011"
 	"github.com/kevindamm/projecteuler/golang/p0012"
 	"github.com/kevindamm/projecteuler/golang/p0013"
+	"github.com/kevindamm/projecteuler/golang/p0014"
+	"github.com/kevindamm/projecteuler/golang/p0015"
 )
 
 func TestAllProblems(t *testing.T) {
 	tests := []struct {
 		name     string
-		test     func(int) int
+		test     func(int) int64
 		input    int
-		expected int
+		expected int64
 	}{
 		{"p0001", p0001.SumOf3or5, 10, 23},
 		{"p0002", p0002.SumEvenFibonacciUntil, 100, 44},
@@ -54,12 +56,17 @@ func TestAllProblems(t *testing.T) {
 		{"p0005", p0005.SmallestCommonMultiple, 10, 2520},
 		{"p0006", p0006.SqSumDifference, 10, 2640},
 		{"p0007", p0007.NthPrime, 6, 13},
-		{"p0008", p0008.DigitSeries("../data/0008_digits.txt").LargestAdjacentProduct, 4, 5832},
+		{"p0008", p0008.DigitSeriesFile("../data/0008_digits.txt").
+			LargestAdjacentProduct, 4, 5832},
 		{"p0009", p0009.SpecialPythagoreanTriplet, 12, 60},
 		{"p0010", p0010.SummationOfPrimesBelow, 10, 17},
-		{"p0011", p0011.NumberGrid("../data/0011_grid.txt").GreatestProductOfAdjacent, 2, 9306},
+		{"p0011", p0011.NumberGridFile("../data/0011_grid.txt").
+			GreatestProductOfAdjacent, 2, 9306},
 		{"p0012", p0012.FirstTriangleExceedingFactorCount, 5, 28},
-		{"p0013", p0013.NumberList("../data/0013_numbers.txt").LargeSumLeadingDigits, 10, 123},
+		{"p0013", p0013.NumberListFile("../data/0013_numbers.txt").
+			LargeSumLeadingDigits, 1, 5},
+		{"p0014", p0014.LongestCollatzChainStartingBelow, 100, 97},
+		{"p0015", p0015.CountSquareLatticePaths, 2, 6},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

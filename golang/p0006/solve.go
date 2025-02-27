@@ -22,9 +22,9 @@
 
 package p0006
 
-func SqSumDifference(n int) int {
+func SqSumDifference(n int) int64 {
 	sum := (n*n + n) / 2
 	sumsq := n * (2*n + 1) * (n + 1) / 6
 
-	return sum*sum - sumsq
+	return int64(sum*sum - sumsq)
 }

@@ -31,10 +31,23 @@ import (
 	"strings"
 )
 
+// The list of numbers read from
 type bignum_list []*big.Int
 
-func NumberList(digits_file string) bignum_list {
-	numbers := make([]*big.Int, 100)
+func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int64 {
+	bigSum := big.NewInt(0)
+	for _, number := range numbers {
+		bigSum = bigSum.Add(bigSum, number)
+	}
+
+	digitStr := bigSum.String()
+	length := min(num_digits, len(digitStr))
+	digits, _ := strconv.Atoi(digitStr[:length])
+	return int64(digits)
+}
+
+func NumberListFile(digits_file string) bignum_list {
+	numbers := make([]*big.Int, 0)
 	reader, err := os.Open(digits_file)
 	if err != nil {
 		return nil
@@ -51,27 +64,9 @@ func NumberList(digits_file string) bignum_list {
 		number := new(big.Int)
 		number, ok := number.SetString(line, 10)
 		if !ok {
-			return nil
+			log.Fatalf("file contains invalid line %s, expected numbers", line)
 		}
 		numbers = append(numbers, number)
 	}
 	return numbers
-}
-
-func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int {
-	bigSum := big.NewInt(0)
-	for _, number := range numbers {
-		bigSum = bigSum.Add(bigSum, number)
-	}
-
-	digitStr := bigSum.String()
-	l := 10
-	if len(digitStr) < 10 {
-		l = len(digitStr)
-	}
-	digits, err := strconv.Atoi(digitStr[:l])
-	if err != nil {
-		log.Fatal(err)
-	}
-	return digits
 }

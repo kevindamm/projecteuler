@@ -24,24 +24,9 @@ package p0008
 
 import "os"
 
-func DigitSeries(filename string) digit_series {
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		return nil
-	}
-
-	digits := make([]int, 0)
-	for _, bytedata := range data {
-		if bytedata >= '0' && bytedata <= '9' {
-			digits = append(digits, int(bytedata-'0'))
-		}
-	}
-	return digit_series(digits)
-}
-
 type digit_series []int
 
-func (series digit_series) LargestAdjacentProduct(length int) int {
+func (series digit_series) LargestAdjacentProduct(length int) int64 {
 	largest := 0
 
 	for seq := range series.SequencesOf(length) {
@@ -54,10 +39,12 @@ func (series digit_series) LargestAdjacentProduct(length int) int {
 		}
 	}
 
-	return largest
+	return int64(largest)
 }
 
 func (series digit_series) SequencesOf(length int) <-chan []int {
+	// TODO: We could use custom iterators here instead of a channel,
+	//   consider replacing when the combinatorics utility functions are written.
 	channel := make(chan []int)
 
 	go func() {
@@ -68,4 +55,19 @@ func (series digit_series) SequencesOf(length int) <-chan []int {
 	}()
 
 	return channel
+}
+
+func DigitSeriesFile(filename string) digit_series {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return nil
+	}
+
+	digits := make([]int, 0)
+	for _, bytedata := range data {
+		if bytedata >= '0' && bytedata <= '9' {
+			digits = append(digits, int(bytedata-'0'))
+		}
+	}
+	return digit_series(digits)
 }
