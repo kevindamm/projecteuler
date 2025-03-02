@@ -21,25 +21,41 @@
 """Problem 0024 - Lexicographic Permutations"""
 
 from typing import List
-from math import factorial
 
 def nth_permutation(digits: List[int], goal: int) -> int:
+  """Returns the nth integer in the permutation sequence of (sorted) digits."""
   progress: List[int] = []
   position = 1
   digits = sorted(digits)
+  # Gap size is determined by the total permutation of all the remaining digits.
+  gaps = factorial_range(len(digits))
 
+  # Select the appropriate next digit, indexed by number of gaps to cross.  The
+  # integer division floors the resulting index (i.e., max without exceeding).
   while len(digits):
-    gap = factorial(len(digits)-1)
+    print(digits, progress)
+    gap = gaps[len(digits)-1]
     index = (goal-position) // gap
     digit = digits[index]
-    progress.append(digit)
+
     digits.remove(digit)
+    progress.append(digit)
     position += gap * index
 
+  # Convert the list of digits into an integer before returning.
   result = 0
   for digit in progress:
     result = 10*result + digit
   return result
+
+
+def factorial_range(limit: int) -> List[int]:
+  factorials: List[int] = [1]
+  latest_fact = 1
+  for i in range(1, limit):
+    latest_fact *= i
+    factorials.append(latest_fact)
+  return factorials
 
 
 if __name__ == "__main__":
