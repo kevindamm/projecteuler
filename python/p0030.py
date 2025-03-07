@@ -35,12 +35,13 @@ def _digit_search_helper(prior: List[int], rem_digits: int) -> Generator[int, No
 
 def pow_digit_search(pow: int, max_digits: int) -> List[int]:
   results = []
+  powers = [i**pow for i in range(10)]
   for leading_digit in range(1, 10):
     for digits in _digit_search_helper([leading_digit], max_digits):
-      number, powsum, length = 0, 0, len(digits)
-      for i, d in enumerate(digits):
-        powsum += d**pow
-        number += d*(10**(length-i-1))
+      number, powsum = 0, 0
+      for d in digits:
+        powsum += powers[d]
+        number = 10*number + d
       if powsum == number:
         results.append(number)
 
