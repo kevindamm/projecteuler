@@ -12,6 +12,8 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
-    // ...
+    // Consistent structure and styling of problem definitions'
+    // formatting at the head of blog posts.
+    app.component('ProjectEulerProblem')
   }
 } satisfies Theme

@@ -26,7 +26,7 @@ import (
 	"github.com/kevindamm/projecteuler/golang/util"
 )
 
-func SmallestCommonMultiple(last int) int {
+func SmallestCommonMultiple(last int) int64 {
 	if last <= 0 {
 		return 0
 	}
@@ -85,7 +85,7 @@ func (factors *Factors) Merge(other Factors) {
 	}
 }
 
-func (factors Factors) product() int {
+func (factors Factors) product() int64 {
 	total := uint64(1)
 	for k, v := range map[uint64]int(factors) {
 		// Integer power calculated with successive multiplies like this
@@ -97,5 +97,5 @@ func (factors Factors) product() int {
 		}
 	}
 
-	return int(total)
+	return int64(total)
 }

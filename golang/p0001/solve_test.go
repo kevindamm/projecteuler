@@ -29,7 +29,7 @@ import (
 )
 
 func TestProblem001(t *testing.T) {
-	type sumof3or5 func(int) int
+	type sumof3or5 func(int) int64
 
 	tests := []struct {
 		name     string

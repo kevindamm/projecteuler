@@ -22,7 +22,7 @@
 
 package p0009
 
-func SpecialPythagoreanTriplet(triplet_sum int) int {
+func SpecialPythagoreanTriplet(triplet_sum int) int64 {
 	for i := range triplet_sum - 2 {
 		a := i + 2
 		for j := range triplet_sum - a + 1 {
@@ -31,7 +31,7 @@ func SpecialPythagoreanTriplet(triplet_sum int) int {
 			c := triplet_sum - a - b
 			c2 := (a * a) + (b * b)
 			if (c * c) == c2 {
-				return a * b * c
+				return int64(a * b * c)
 			}
 		}
 	}

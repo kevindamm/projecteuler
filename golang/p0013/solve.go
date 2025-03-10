@@ -18,22 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0003/solve.go
+// github:kevindamm/projecteuler/golang/p0013/solve.go
 
-package p0003
+package p0013
 
-import "github.com/kevindamm/projecteuler/golang/util"
+import (
+	"bufio"
+	"log"
+	"math/big"
+	"os"
+	"strconv"
+	"strings"
+)
 
-func LargestPrimeFactor(n int) int64 {
-	var reduced = uint64(n)
-	for prime := range util.GeneratePrimesUntil(1 << 20) {
-		if prime > reduced>>1 {
-			return int64(reduced)
-		}
-		for reduced%prime == 0 {
-			reduced /= prime
-		}
+// The list of numbers read from
+type bignum_list []*big.Int
+
+func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int64 {
+	bigSum := big.NewInt(0)
+	for _, number := range numbers {
+		bigSum = bigSum.Add(bigSum, number)
 	}
 
-	return int64(reduced)
+	digitStr := bigSum.String()
+	length := min(num_digits, len(digitStr))
+	digits, _ := strconv.Atoi(digitStr[:length])
+	return int64(digits)
+}
+
+func NumberListFile(digits_file string) bignum_list {
+	numbers := make([]*big.Int, 0)
+	reader, err := os.Open(digits_file)
+	if err != nil {
+		return nil
+	}
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	scanner.Split(bufio.ScanLines)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.Trim(line, " ") == "" {
+			continue
+		}
+		number := new(big.Int)
+		number, ok := number.SetString(line, 10)
+		if !ok {
+			log.Fatalf("file contains invalid line %s, expected numbers", line)
+		}
+		numbers = append(numbers, number)
+	}
+	return numbers
 }

@@ -24,14 +24,14 @@ package p0002
 
 // Problem 2 - Even Fibonacci Numbers
 
-func SumEvenFibonacciUntil(n int) int {
+func SumEvenFibonacciUntil(n int) int64 {
 	sum := int(0)
 	for fibn := range fibonacci(n) {
 		if fibn&1 == 0 {
 			sum += fibn
 		}
 	}
-	return sum
+	return int64(sum)
 }
 
 func fibonacci(limit int) <-chan int {

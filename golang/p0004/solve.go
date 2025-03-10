@@ -26,7 +26,7 @@ import "fmt"
 
 // Problem 4 - Largest Palindrome Product
 
-func FindLargestPalindromeProduct(limit int) int {
+func FindLargestPalindromeProduct(limit int) int64 {
 	largest := 0
 	for i := limit - 1; i > 1; i-- {
 		for j := limit - 1; j >= i; j-- {
@@ -38,7 +38,7 @@ func FindLargestPalindromeProduct(limit int) int {
 			}
 		}
 	}
-	return largest
+	return int64(largest)
 }
 
 func IsPalindromicInt(number int) bool {
