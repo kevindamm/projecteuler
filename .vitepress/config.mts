@@ -5,6 +5,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Project Euler solutions',
   description: 'Exploring various problems from the wonderful math puzzle site [Project Euler](https://projecteuler.net)',
+  cleanUrls: true,
   
   sitemap: {
     hostname: 'https://projecteuler.kevindamm.com',
