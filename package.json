@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "vitepress dev blog",
-    "build": "vitepress build blog",
-    "preview": "vitepress preview blog"
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "preview": "vitepress preview"
   },
   "devDependencies": {
     "markdown-it-footnote": "^4.0.0",
