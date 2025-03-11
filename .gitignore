@@ -21,8 +21,8 @@ explorations
 TODOs.md
 RELEASE_NOTE*.md
 
-blog/.vitepress/dist
-blog/.vitepress/cache
+.vitepress/dist
+.vitepress/cache
 
 # Editor directories and files
 .vscode/*

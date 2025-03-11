@@ -9,28 +9,25 @@ terminal :-
 // known to be multiples of 3 or 5.  However, it still looks at every individual
 // qualifying number consecutively, and has to discount the double-added values.
 multiple_sum(?n: int #> 0) = ?sum :-
-  sum_by(3, ?n) = ?sum3,
-  sum_by(5, ?n) = ?sum5,
-  sum_by(15, ?n) = ?sum15,
+  ?sum3 = sum_by(3, ?n),
+  ?sum5 = sum_by(5, ?n),
+  ?sum15 = sum_by(15, ?n),
   ?sum is ?sum3 + ?sum5 - ?sum15
 
 
-sum_by(?inc, ?n) = ?sum :-
-  sum_by_(?inc, ?n, 0, 0) = ?sum
+sum_by(?inc, ?n) => sum_by(?inc, ?n, 0, 0)
 
-sum_by(?inc, ?n, ?i, ?accum) = ?sum :-
-  ?i #< ?n,
-  sum_by(?inc, ?n, ?i + ?inc, ?accum + ?i) = ?sum
+sum_by(?inc, ?n, ?i #< ?n, ?accum) =>
+  sum_by(?inc, ?n, ?i + ?inc, ?accum + ?i)
 
-sum_by(_, ?n, ?i, ?accum) = ?accum :-
-  ?i #>= ?n
+sum_by(_, ?n, ?i #>= ?n, ?accum) = ?accum
 
 
 // Naive solution, looks at every number.
-// multiple_sum(?n) = ?sum :- multiple_seq(?n-1, 0) = ?sum
+// multiple_sum(?n: int #> 0) => multiple_seq(?n-1, 0)
 
-multiple_seq(?n, ?subtotal) = ?sum :-
-  multiple_seq(?n-1, ?subtotal + #contribute(?n)) = ?sum
+multiple_seq(?n, ?subtotal) =>
+  multiple_seq(?n-1, ?subtotal + #contribute(?n))
 
 multiple_seq(0, ?total) = ?total
 
