@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "dev": "vitepress dev .",
-    "build": "vitepress build .",
-    "preview": "vitepress preview"
+    "vp:dev": "vitepress dev",
+    "vp:build": "vitepress build",
+    "cf:dev": "npx wrangler pages dev .",
+    "cf:deploy": "npx wrangler pages deploy ."
   },
   "devDependencies": {
     "markdown-it-footnote": "^4.0.0",
