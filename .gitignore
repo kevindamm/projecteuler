@@ -21,8 +21,10 @@ explorations
 TODOs.md
 RELEASE_NOTE*.md
 
+# local (dev, build) outputs
 .vitepress/dist
 .vitepress/cache
+.wrangler
 
 # Editor directories and files
 .vscode/*

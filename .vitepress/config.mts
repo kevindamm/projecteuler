@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Project Euler solutions',
+  title: 'Project Euler 100',
   description: 'Exploring various problems from the wonderful math puzzle site [Project Euler](https://projecteuler.net)',
   cleanUrls: true,
   
@@ -16,6 +16,10 @@ export default defineConfig({
         }})
       return items
     }
+  },
+
+  rewrites: {
+    "blog/:path*": ":path*"
   },
 
   themeConfig: {
