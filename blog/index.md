@@ -1,20 +1,21 @@
 ---
 layout: home
-title: "v(alpha)"
+title: "Project Euler 100"
 
 hero:
-  name: "Project Euler analysis"
+  name: "Project Euler 100"
   tagline: "in forming informing form from functions"
   actions:
     - theme: brand
-      text: GOTO latest
-      link: /latest
+      text: Problem 0001
+      link: /0001
+    - theme: brand
+      text: Problem 0002
+      link: /0002
     - theme: alt
-      text: (original)
+      text: (original site)
       link: https://projecteuler.net/archives
 ---
-
-
 
 
 Problems from the math puzzle site [Project Euler](https://projecteuler.net)

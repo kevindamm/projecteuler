@@ -19,7 +19,7 @@ export default defineConfig({
   },
 
   rewrites: {
-    "blog/:path*": ":path*"
+    "blog/:path": ":path"
   },
 
   themeConfig: {
