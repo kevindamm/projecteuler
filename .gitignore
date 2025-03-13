@@ -10,21 +10,16 @@ lerna-debug.log*
 # Compiler outputs
 node_modules/
 .DS_Store
-dist
-dist-ssr
+dist/
 temp
 coverage
 *.local
 __pycache__/
 
-explorations
-TODOs.md
-RELEASE_NOTE*.md
-
 # local (dev, build) outputs
-.vitepress/dist
-.vitepress/cache
-.wrangler
+pages/.vitepress/dist
+pages/.vitepress/cache
+.wrangler/
 
 # Editor directories and files
 .vscode/*
