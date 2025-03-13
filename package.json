@@ -3,12 +3,12 @@
   "scripts": {
     "build": "npx vitepress build pages",
     "dev": "npm run build && npx wrangler pages dev",
-    "deploy": "num run build && npx wrangler pages deploy"
+    "deploy": "npm run build && npx wrangler pages deploy"
   },
-
   "devDependencies": {
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-mathjax3": "^4.3.2",
+    "typescript": "^5.8.2",
     "vitepress": "^1.6.3",
     "vue": "^3.5.11"
   },
