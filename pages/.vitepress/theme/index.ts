@@ -4,6 +4,8 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 
+import ProjectEulerProblem from './components/ProjectEulerProblem.vue'
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -12,8 +14,6 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
-    // Consistent structure and styling of problem definitions'
-    // formatting at the head of blog posts.
-    app.component('ProjectEulerProblem')
+    app.component('pe100-problem', ProjectEulerProblem)
   }
 } satisfies Theme
