@@ -1,8 +1,9 @@
 {
   "private": true,
   "scripts": {
+    "vp:dev": "npx vitepress dev pages",
     "build": "npx vitepress build pages",
-    "dev": "npm run build && npx wrangler pages dev",
+    "cf:dev": "npm run build && npx wrangler pages dev",
     "deploy": "npm run build && npx wrangler pages deploy"
   },
   "devDependencies": {
