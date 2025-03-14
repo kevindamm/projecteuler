@@ -6,8 +6,12 @@
     "deploy": "npm run build && npx wrangler pages deploy"
   },
   "devDependencies": {
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-mathjax3": "^4.3.2",
+    "prettier": "^3.5.3",
     "typescript": "^5.8.2",
     "vitepress": "^1.6.3",
     "vue": "^3.5.11"
