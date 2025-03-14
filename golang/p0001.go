@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p001/solve.go
+// github:kevindamm/projecteuler/golang/p0001.go
 
-package p0001
+package solutions
 
 // Problem 001 - Multiples of 3 or 5
 // see `/blog/001` for full commentary.

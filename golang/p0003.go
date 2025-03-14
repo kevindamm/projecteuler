@@ -18,37 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0004/solve.go
+// github:kevindamm/projecteuler/golang/p0003.go
 
-package p0004
+package solutions
 
-import "fmt"
-
-// Problem 4 - Largest Palindrome Product
-
-func FindLargestPalindromeProduct(limit int) int64 {
-	largest := 0
-	for i := limit - 1; i > 1; i-- {
-		for j := limit - 1; j >= i; j-- {
-			product := i * j
-			if IsPalindromicInt(product) {
-				if product > largest {
-					largest = product
-				}
-			}
+func LargestPrimeFactor(n int) int64 {
+	var reduced = uint64(n)
+	for prime := range GeneratePrimesUntil(1 << 20) {
+		if prime > reduced>>1 {
+			return int64(reduced)
+		}
+		for reduced%prime == 0 {
+			reduced /= prime
 		}
 	}
-	return int64(largest)
-}
 
-func IsPalindromicInt(number int) bool {
-	digits := fmt.Sprintf("%d", number)
-	i, j := 0, len(digits)-1
-	for i <= j {
-		if digits[i] != digits[j] {
-			return false
-		}
-		i, j = i+1, j-1
-	}
-	return true
+	return int64(reduced)
 }

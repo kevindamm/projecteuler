@@ -18,22 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0009/solve.go
+// github:kevindamm/projecteuler/golang/p0010/solve.go
 
-package p0009
+package solutions
 
-func SpecialPythagoreanTriplet(triplet_sum int) int64 {
-	for i := range triplet_sum - 2 {
-		a := i + 2
-		for j := range triplet_sum - a + 1 {
-			b := j + a + 1
+func SummationOfPrimesBelow(n int) int64 {
+	sum := 0
 
-			c := triplet_sum - a - b
-			c2 := (a * a) + (b * b)
-			if (c * c) == c2 {
-				return int64(a * b * c)
-			}
-		}
+	// We can reuse the utility from problems 3 and 5
+	// for generating values from the prime series.
+	for prime := range GeneratePrimesUntil(uint64(n)) {
+		sum += int(prime)
 	}
-	return 0
+	return int64(sum)
 }

@@ -18,55 +18,58 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0013/solve.go
+// github:kevindamm/projecteuler/golang/util/primes_test.go
 
-package p0013
+package solutions_test
 
 import (
-	"bufio"
-	"log"
-	"math/big"
-	"os"
-	"strconv"
-	"strings"
+	"testing"
+
+	solutions "github.com/kevindamm/projecteuler/golang"
 )
 
-// The list of numbers read from
-type bignum_list []*big.Int
-
-func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int64 {
-	bigSum := big.NewInt(0)
-	for _, number := range numbers {
-		bigSum = bigSum.Add(bigSum, number)
+func TestSieveSmall(t *testing.T) {
+	tests := []struct {
+		name  string
+		input uint64
+		want  bool
+	}{
+		{"1", 1, false},
+		{"3", 3, true},
+		{"5", 5, true},
+		{"7", 7, true},
+		{"9", 9, false},
+		{"11", 11, true},
+		{"13", 13, true},
+		{"15", 15, false},
 	}
-
-	digitStr := bigSum.String()
-	length := min(num_digits, len(digitStr))
-	digits, _ := strconv.Atoi(digitStr[:length])
-	return int64(digits)
+	sieve := solutions.NewSieve(15)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if sieve.IsPrime(tt.input) != tt.want {
+				t.Errorf("%s expected %v", tt.name, tt.want)
+			}
+		})
+	}
 }
 
-func NumberListFile(digits_file string) bignum_list {
-	numbers := make([]*big.Int, 0)
-	reader, err := os.Open(digits_file)
-	if err != nil {
-		return nil
+func TestSieveLarge(t *testing.T) {
+	tests := []struct {
+		name  string
+		input uint64
+		want  bool
+	}{
+		{"37337 prime", 37337, true},
+		{"60516 not prime", 60516, false},
+		{"69337 prime", 69337, true},
+		{"333667 prime", 333667, true},
 	}
-	defer reader.Close()
-	scanner := bufio.NewScanner(reader)
-	scanner.Split(bufio.ScanLines)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.Trim(line, " ") == "" {
-			continue
-		}
-		number := new(big.Int)
-		number, ok := number.SetString(line, 10)
-		if !ok {
-			log.Fatalf("file contains invalid line %s, expected numbers", line)
-		}
-		numbers = append(numbers, number)
+	sieve := solutions.NewSieve(1 << 20)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if sieve.IsPrime(tt.input) != tt.want {
+				t.Errorf("%s expected %v", tt.name, tt.want)
+			}
+		})
 	}
-	return numbers
 }

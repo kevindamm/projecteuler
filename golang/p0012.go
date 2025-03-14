@@ -18,13 +18,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0006/solve.go
+// github:kevindamm/projecteuler/golang/p0012.go
 
-package p0006
+package solutions
 
-func SqSumDifference(n int) int64 {
-	sum := (n*n + n) / 2
-	sumsq := n * (2*n + 1) * (n + 1) / 6
+func triangle_numbers(size int) <-chan int {
+	intchan := make(chan int)
 
-	return int64(sum*sum - sumsq)
+	go func() {
+		defer close(intchan)
+		i := 1
+		sum := i
+		for sum < size {
+			intchan <- sum
+			i += 1
+			sum += i
+		}
+	}()
+
+	return intchan
+}
+
+func FirstTriangleExceedingFactorCount(count_limit int) int64 {
+	for i := range 3 {
+		digits := i + 7
+		size := 1 << (digits*10/3 + 1)
+		factor_count := make([]int, size)
+		factor_count[0] = 1
+		factor_count[1] = 1
+
+		for i := 2; i < size; i++ {
+			if factor_count[i] == 0 {
+				factor_count[i] = 1
+			}
+			mult := i
+			for mult < size {
+				factor_count[mult] += 1
+				mult += i
+			}
+		}
+
+		for number := range triangle_numbers(size) {
+			if factor_count[number] >= count_limit {
+				return int64(number)
+			}
+		}
+	}
+
+	return -1
 }

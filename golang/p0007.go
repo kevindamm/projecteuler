@@ -18,15 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0007/solve.go
+// github:kevindamm/projecteuler/golang/p0007.go
 
-package p0007
-
-import "github.com/kevindamm/projecteuler/golang/util"
+package solutions
 
 func NthPrime(limit int) int64 {
 	count := 0
-	for prime := range util.GeneratePrimesUntil(uint64(limit * 100)) {
+	for prime := range GeneratePrimesUntil(uint64(limit * 100)) {
 		count += 1
 		if count == limit {
 			return int64(prime)

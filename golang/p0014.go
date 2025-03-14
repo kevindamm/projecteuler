@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0014/solve.go
+// github:kevindamm/projecteuler/golang/p0014.go
 
-package p0014
+package solutions
 
 // Returns the start of the longest sequence, for any start value below `limit`.
 func LongestCollatzChainStartingBelow(limit int) int64 {
@@ -84,8 +84,10 @@ func (graph collatz_graph) CollatzLength(x int) int {
 }
 
 // Compute the next number in the sequence, where
-//    if x is even, x' = x/2
-//    if x is odd,  x' = 3*x + 1
+//
+//	  if x is even, x' = x/2
+//		if x is odd,  x' = 3*x + 1
+//
 // This is famously known as the Collatz Sequence.
 func CollatzNext(x int) int {
 	if x&1 == 0 {

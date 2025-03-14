@@ -18,17 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0010/solve.go
+// github:kevindamm/projecteuler/golang/p0009.go
 
-package p0010
+package solutions
 
-import "github.com/kevindamm/projecteuler/golang/util"
+func SpecialPythagoreanTriplet(triplet_sum int) int64 {
+	for i := range triplet_sum - 2 {
+		a := i + 2
+		for j := range triplet_sum - a + 1 {
+			b := j + a + 1
 
-func SummationOfPrimesBelow(n int) int64 {
-	sum := 0
-
-	for prime := range util.GeneratePrimesUntil(uint64(n)) {
-		sum += int(prime)
+			c := triplet_sum - a - b
+			c2 := (a * a) + (b * b)
+			if (c * c) == c2 {
+				return int64(a * b * c)
+			}
+		}
 	}
-	return int64(sum)
+	return 0
 }

@@ -20,7 +20,7 @@
 //
 // github:kevindamm/projecteuler/golang/util/primes.go
 
-package util
+package solutions
 
 type SieveOfEratosthenes interface {
 	IsPrime(uint64) bool

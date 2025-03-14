@@ -18,20 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0005/solve.go
+// github:kevindamm/projecteuler/golang/p0005.go
 
-package p0005
-
-import (
-	"github.com/kevindamm/projecteuler/golang/util"
-)
+package solutions
 
 func SmallestCommonMultiple(last int) int64 {
 	if last <= 0 {
 		return 0
 	}
 	value := uint64(last)
-	sieve := util.NewSieve(uint64(last))
+	sieve := NewSieve(uint64(last))
 	factors := get_factors(sieve, value)
 
 	for i := range last - 2 {
@@ -45,7 +41,7 @@ func SmallestCommonMultiple(last int) int64 {
 
 type Factors map[uint64]int
 
-func get_factors(sieve util.SieveOfEratosthenes, value uint64) Factors {
+func get_factors(sieve SieveOfEratosthenes, value uint64) Factors {
 	if sieve.IsPrime(value) {
 		return Factors{value: 1}
 	}

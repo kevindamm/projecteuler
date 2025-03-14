@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0011/solve.go
+// github:kevindamm/projecteuler/golang/p0011.go
 
-package p0011
+package solutions
 
 import (
 	"bufio"

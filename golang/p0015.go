@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0015/solve.go
+// github:kevindamm/projecteuler/golang/p0015.go
 
-package p0015
+package solutions
 
 import "math/big"
 

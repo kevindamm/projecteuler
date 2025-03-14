@@ -20,4 +20,8 @@
 //
 // github:kevindamm/projecteuler/golang/main.go
 
-package main
+// This package contains all of the "Project Euler 100" problem solutions.
+// Assertion tests for these can be found in `main_test.go` where test inputs
+// are from the smaller scale (non-solution) typically provided in the question
+// itself, in order to avoid explicitly spoiling the solution in source control.
+package solutions

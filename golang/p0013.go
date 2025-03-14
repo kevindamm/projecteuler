@@ -18,37 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/p0002/solve.go
+// github:kevindamm/projecteuler/golang/p0013.go
 
-package p0002
+package solutions
 
-// Problem 2 - Even Fibonacci Numbers
+import (
+	"bufio"
+	"log"
+	"math/big"
+	"os"
+	"strconv"
+	"strings"
+)
 
-func SumEvenFibonacciUntil(n int) int64 {
-	sum := int(0)
-	for fibn := range fibonacci(n) {
-		if fibn&1 == 0 {
-			sum += fibn
-		}
+// The list of numbers read from
+type bignum_list []*big.Int
+
+func (numbers bignum_list) LargeSumLeadingDigits(num_digits int) int64 {
+	bigSum := big.NewInt(0)
+	for _, number := range numbers {
+		bigSum = bigSum.Add(bigSum, number)
 	}
-	return int64(sum)
+
+	digitStr := bigSum.String()
+	length := min(num_digits, len(digitStr))
+	digits, _ := strconv.Atoi(digitStr[:length])
+	return int64(digits)
 }
 
-func fibonacci(limit int) <-chan int {
-	if limit <= 0 {
+func NumberListFile(digits_file string) bignum_list {
+	numbers := make([]*big.Int, 0)
+	reader, err := os.Open(digits_file)
+	if err != nil {
 		return nil
 	}
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	scanner.Split(bufio.ScanLines)
 
-	fibs := make(chan int)
-	go func() {
-		var i, j int = 1, 2
-		fibs <- 1
-		defer close(fibs)
-
-		for j < limit {
-			fibs <- j
-			i, j = j, i+j
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.Trim(line, " ") == "" {
+			continue
 		}
-	}()
-	return fibs
+		number := new(big.Int)
+		number, ok := number.SetString(line, 10)
+		if !ok {
+			log.Fatalf("file contains invalid line %s, expected numbers", line)
+		}
+		numbers = append(numbers, number)
+	}
+	return numbers
 }

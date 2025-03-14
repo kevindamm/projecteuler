@@ -18,56 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/util/primes_test.go
+// github:kevindamm/projecteuler/golang/p0002.go
 
-package util
+package solutions
 
-import (
-	"testing"
-)
+// Problem 2 - Even Fibonacci Numbers
 
-func TestSieveSmall(t *testing.T) {
-	tests := []struct {
-		name  string
-		input uint64
-		want  bool
-	}{
-		{"1", 1, false},
-		{"3", 3, true},
-		{"5", 5, true},
-		{"7", 7, true},
-		{"9", 9, false},
-		{"11", 11, true},
-		{"13", 13, true},
-		{"15", 15, false},
+func SumEvenFibonacciUntil(n int) int64 {
+	sum := int(0)
+	for fibn := range fibonacci(n) {
+		if fibn&1 == 0 {
+			sum += fibn
+		}
 	}
-	sieve := NewSieve(15)
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if sieve.IsPrime(tt.input) != tt.want {
-				t.Errorf("%s expected %v", tt.name, tt.want)
-			}
-		})
-	}
+	return int64(sum)
 }
 
-func TestSieveLarge(t *testing.T) {
-	tests := []struct {
-		name  string
-		input uint64
-		want  bool
-	}{
-		{"37337 prime", 37337, true},
-		{"60516 not prime", 60516, false},
-		{"69337 prime", 69337, true},
-		{"333667 prime", 333667, true},
+func fibonacci(limit int) <-chan int {
+	if limit <= 0 {
+		return nil
 	}
-	sieve := NewSieve(1 << 20)
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if sieve.IsPrime(tt.input) != tt.want {
-				t.Errorf("%s expected %v", tt.name, tt.want)
-			}
-		})
-	}
+
+	fibs := make(chan int)
+	go func() {
+		var i, j int = 1, 2
+		fibs <- 1
+		defer close(fibs)
+
+		for j < limit {
+			fibs <- j
+			i, j = j, i+j
+		}
+	}()
+	return fibs
 }
