@@ -54,6 +54,8 @@ func TestAllProblems(t *testing.T) {
 		{"p0014", solutions.LongestCollatzChainStartingBelow, 100, 97},
 		{"p0015", solutions.CountSquareLatticePaths, 2, 6},
 		{"p0016", solutions.SumOfDigitsOfPowersOfTwo, 15, 26},
+		{"p0017-a", solutions.NumberLetterCount, 342, 23},
+		{"p0017-b", solutions.NumberLetterCount, 115, 20},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
