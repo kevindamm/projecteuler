@@ -56,6 +56,7 @@ func TestAllProblems(t *testing.T) {
 		{"p0016", solutions.SumOfDigitsOfPowersOfTwo, 15, 26},
 		{"p0017-a", solutions.NumberLetterCount, 342, 23},
 		{"p0017-b", solutions.NumberLetterCount, 115, 20},
+		{"p0020", solutions.FactorialDigitSum, 10, 27},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
