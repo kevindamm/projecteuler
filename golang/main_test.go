@@ -56,6 +56,8 @@ func TestAllProblems(t *testing.T) {
 		{"p0016", solutions.SumOfDigitsOfPowersOfTwo, 15, 26},
 		{"p0017-a", solutions.NumberLetterCount, 342, 23},
 		{"p0017-b", solutions.NumberLetterCount, 115, 20},
+		{"p0018", solutions.NumberTriangleFile("../data/0018_triangle.txt").
+			MaximumPathSum, 5, 390},
 		{"p0020", solutions.FactorialDigitSum, 10, 27},
 	}
 	for _, tt := range tests {
