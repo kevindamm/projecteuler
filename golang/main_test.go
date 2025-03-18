@@ -140,6 +140,10 @@ func TestAllProblems(t *testing.T) {
 		{"p0020",
 			func() int64 { return solutions.FactorialDigitSum(10) },
 			27},
+
+		{"p0021",
+			func() int64 { return int64(solutions.CountAmicableUnder(300)) },
+			504},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
