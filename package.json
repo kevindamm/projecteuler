@@ -11,6 +11,7 @@
   "bin": {
     "new-golang": "./bin/new_golang.js",
     "new-prolog": "./bin/new_prolog.js",
+    "new-python": "./bin/new_python.js",
     "begin": "./bin/new_page.js"
   },
   "devDependencies": {
