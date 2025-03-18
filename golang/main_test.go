@@ -144,6 +144,14 @@ func TestAllProblems(t *testing.T) {
 		{"p0021",
 			func() int64 { return int64(solutions.CountAmicableUnder(300)) },
 			504},
+
+		{"p0022",
+			func() int64 {
+				return solutions.NamesListFile("../data/0022_names.txt").
+					Truncate(100).
+					TotalNameScores()
+			},
+			321387},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
