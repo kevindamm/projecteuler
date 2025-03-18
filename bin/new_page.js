@@ -2,7 +2,7 @@
 
 /**
  * @file new_page.js
- * @example npm x begin 42 --title="Coded Triangle Numbers"
+ * @example npm x begin 42 "Coded Triangle Numbers"
  * 
  * Simple Node.js script for generating the boilerplate of a new blog post.
  * 
