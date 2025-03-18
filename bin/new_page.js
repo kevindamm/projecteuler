@@ -7,10 +7,11 @@
  * Simple Node.js script for generating the boilerplate of a new blog post.
  * 
  * @param integer (required) the problem number (according to ProjectEuler.net)
- * @argument title (optional) the problem's title (can be defined later).
+ * @param string (optional) the problem's title (it can be defined later).
  */
 
 import path from 'node:path';
+import { existsSync } from 'node:fs';
 import { Buffer } from 'node:buffer';
 import { writeFile } from 'node:fs/promises';
 
@@ -22,8 +23,15 @@ const { log, error } = console;
 const today = new Date();
 const problem_number = argvProblemNumber();
 const digits_padded = String(problem_number).padStart(4, '0');
-const filepath = path.join('.', 'pages/', digits_padded.concat('.md'));
-log(`generating new article page for ${filepath} ...`);
+const filepath = path.join('.', 'pages',
+  digits_padded.concat('.md'));
+if (existsSync(filepath)) {
+  error(`File ${filepath} already exists, ` +
+    `delete it first if you intended to overwrite it.`);
+  process.exit(1);
+}
+log(`Generating new article page for ${filepath} ...`);
+
 
 const title = argvProblemTitle();
 const problem_description = await fetchDescription(problem_number);
