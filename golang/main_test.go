@@ -152,6 +152,10 @@ func TestAllProblems(t *testing.T) {
 					TotalNameScores()
 			},
 			321387},
+
+		{"p0023",
+			func() int64 { return solutions.NonAbundantSumsUnder(250) },
+			15891},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
