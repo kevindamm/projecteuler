@@ -18,15 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/main_test.go
+// github:kevindamm/projecteuler/golang/solutions_test.go
 
 package solutions_test
 
 import (
+	"path"
 	"testing"
 
 	solutions "github.com/kevindamm/projecteuler/golang"
 )
+
+const DATA_DIR = "../public/data/"
 
 func TestAllProblems(t *testing.T) {
 	// A compromise between boilerplate and table-driven test structure.
@@ -71,7 +74,8 @@ func TestAllProblems(t *testing.T) {
 
 		{"p0008",
 			func() int64 {
-				return solutions.DigitSeriesFile("../data/0008_digits.txt").
+				return solutions.DigitSeriesFile(
+					path.Join(DATA_DIR, "0008_digits.txt")).
 					LargestAdjacentProduct(4)
 			},
 			5832},
@@ -86,7 +90,8 @@ func TestAllProblems(t *testing.T) {
 
 		{"p0011",
 			func() int64 {
-				return solutions.NumberGridFile("../data/0011_grid.txt").
+				return solutions.NumberGridFile(
+					path.Join(DATA_DIR, "0011_grid.txt")).
 					GreatestProductOfAdjacent(2)
 			},
 			9306},
@@ -97,7 +102,8 @@ func TestAllProblems(t *testing.T) {
 
 		{"p0013",
 			func() int64 {
-				return solutions.NumberListFile("../data/0013_numbers.txt").
+				return solutions.NumberListFile(
+					path.Join(DATA_DIR, "0013_numbers.txt")).
 					LargeSumLeadingDigits(1)
 			},
 			5},
@@ -124,7 +130,8 @@ func TestAllProblems(t *testing.T) {
 
 		{"p0018",
 			func() int64 {
-				return solutions.NumberTriangleFile("../data/0018_triangle.txt").
+				return solutions.NumberTriangleFile(
+					path.Join(DATA_DIR, "0018_triangle.txt")).
 					MaximumPathSum(5)
 			},
 			390},
@@ -147,7 +154,8 @@ func TestAllProblems(t *testing.T) {
 
 		{"p0022",
 			func() int64 {
-				return solutions.NamesListFile("../data/0022_names.txt").
+				return solutions.NamesListFile(
+					path.Join(DATA_DIR, "0022_names.txt")).
 					Truncate(100).
 					TotalNameScores()
 			},

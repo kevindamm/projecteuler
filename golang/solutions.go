@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// github:kevindamm/projecteuler/golang/main.go
+// github:kevindamm/projecteuler/golang/solutions.go
 
 // This package contains all of the "Project Euler 100" problem solutions.
 // Assertion tests for these can be found in `main_test.go` where test inputs
