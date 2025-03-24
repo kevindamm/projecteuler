@@ -18,14 +18,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def powdigitsum(bits: int) -> int:
+def PowDigitSum(bits: int) -> int:
   sum = 0
   digits = str(2**bits)
   for ch in digits:
     sum += ord(ch)-ord('0')
   return sum
-
-
-if __name__ == "__main__":
-  assert powdigitsum(15) == 26
-  print(powdigitsum(1000))

@@ -26,7 +26,3 @@ def SumSquareSquareSumDifference(n: int) -> int:
   squaresum = sum(list(range(1,n+1)))**2
 
   return squaresum - sumsquare
-
-
-if __name__ == "__main__":
-  print(SumSquareSquareSumDifference(1000))

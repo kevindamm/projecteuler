@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def factorial_digit_sum(n: int) -> int:
+def FactorialDigitSum(n: int) -> int:
   result = 1
   for x in range(2,n+1):
     result *= x
@@ -28,7 +28,3 @@ def factorial_digit_sum(n: int) -> int:
     digitsum += result % 10
     result = result // 10
   return digitsum
-
-if __name__ == "__main__":
-  answer = factorial_digit_sum(100)
-  print(answer)

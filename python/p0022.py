@@ -22,7 +22,7 @@
 
 from typing import List
 
-def read_names(filepath: str) -> List[str]:
+def ParseNames(filepath: str) -> List[str]:
   names: List[str] = []
   with open(filepath) as f:
     for line in f.readlines():
@@ -30,7 +30,7 @@ def read_names(filepath: str) -> List[str]:
 
   return names
 
-def total_scores(names: List[str]) -> int:
+def SumNameScores(names: List[str]) -> int:
   total = 0
   names = sorted(filter(lambda s: s.strip() != 0, names))
 
@@ -41,9 +41,3 @@ def total_scores(names: List[str]) -> int:
     total += score * (i+1)
 
   return total
-
-
-if __name__ == "__main__":
-  names = read_names("./data/0022_names.txt")
-  answer = total_scores(names)
-  print(answer)

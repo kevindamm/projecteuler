@@ -36,5 +36,5 @@ def gen_multiples(n: int) -> Iterator[int]:
     if i % 15 == 0:
       i3 += 3
 
-if __name__ == "__main__":
-  print(sum(gen_multiples(100)))
+def SumMultiples3or5(limit: int) -> int:
+  return sum(gen_multiples(limit))

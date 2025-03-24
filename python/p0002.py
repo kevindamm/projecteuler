@@ -29,5 +29,5 @@ def fib(n: int) -> Iterator[int]:
     yield j
     i, j = j, i+j
 
-if __name__ == "__main__":
-  print(sum(fibi for fibi in fib(4000000) if fibi % 2 == 0))
+def SumEvenFibonacciUntil(limit: int) -> int:
+  return sum(fibi for fibi in fib(limit) if fibi % 2 == 0)

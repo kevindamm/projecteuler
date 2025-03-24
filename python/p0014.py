@@ -32,19 +32,18 @@ def collatz(N: int) -> Generator[int]:
   yield 1
 
 
-if __name__ == "__main__":
-  one_million = 10**6
-  lengths = [0]*(one_million)
+def LongestCollatzSequence(start_limit: int) -> int:
+  lengths = [0]*(start_limit)
   lengths[1] = 1
 
-  for i in range(2, one_million):
+  for i in range(2, start_limit):
     stack = []
     for next in collatz(i):
-      if next < one_million and lengths[next] != 0:
+      if next < start_limit and lengths[next] != 0:
         count = lengths[next] + 1
         while len(stack) > 0:
           prev = stack.pop()
-          if prev < one_million:
+          if prev < start_limit:
             lengths[prev] = count
           count += 1
       else:
@@ -55,5 +54,4 @@ if __name__ == "__main__":
     if value > longest:
       best, longest = i, value
 
-  print(best)
-
+  return best

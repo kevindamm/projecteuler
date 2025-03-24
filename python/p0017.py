@@ -98,12 +98,3 @@ def QuickNumberCountToThousand() -> int:
 
   total += len("one") + len("thousand")
   return total
-
-
-if __name__ == "__main__":
-  assert NumberLetterCounts(5) == 19
-  assert numbercount(342) == 23
-  assert numbercount(115) == 20
-
-  # print(NumberLetterCounts(1000))
-  print(QuickNumberCountToThousand())

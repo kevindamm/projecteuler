@@ -38,8 +38,3 @@ def is_palindromic(n: int) -> bool:
       return False
     i, j = i+1, j-1
   return True
-
-
-if __name__ == "__main__":
-  # print(FindLargestPalindromeProduct(100)) # 9009
-  print(FindLargestPalindromeProduct(1000))

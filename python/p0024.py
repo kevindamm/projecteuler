@@ -22,7 +22,7 @@
 
 from typing import List
 
-def nth_permutation(digits: List[int], goal: int) -> int:
+def NthPermutationNumber(digits: List[int], goal: int) -> int:
   """Returns the nth integer in the permutation sequence of (sorted) digits."""
   progress: List[int] = []
   position = 1
@@ -33,7 +33,6 @@ def nth_permutation(digits: List[int], goal: int) -> int:
   # Select the appropriate next digit, indexed by number of gaps to cross.  The
   # integer division floors the resulting index (i.e., max without exceeding).
   while len(digits):
-    print(digits, progress)
     gap = gaps[len(digits)-1]
     index = (goal-position) // gap
     digit = digits[index]
@@ -56,9 +55,3 @@ def factorial_range(limit: int) -> List[int]:
     latest_fact *= i
     factorials.append(latest_fact)
   return factorials
-
-
-if __name__ == "__main__":
-  assert nth_permutation([3, 1, 2, 4], 2) == 1243
-  answer = nth_permutation(list(range(10)), 1_000_000)
-  print(answer)

@@ -30,8 +30,9 @@ def set_of_powers(a: dict, b: dict) -> Set[int]:
       powers.add(x**y)
   return powers
 
-if __name__ == "__main__":
+
+def CountSetsOfPowers(start: int, until: int) -> int:
   powers = set_of_powers(
-    {"from": 2, "until": 100},
-    {"from": 2, "until": 100})
-  print(len(powers))
+    {"from": start, "until": until},
+    {"from": start, "until": until})
+  return len(powers)

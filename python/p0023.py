@@ -22,7 +22,7 @@
 
 from typing import List
 
-def abundant_numbers(limit: int) -> List[int]:
+def AbundantNumbers(limit: int) -> List[int]:
   sum_divisors: List[int] = [0]*(limit+1)
   result: List[int] = []
 
@@ -41,7 +41,7 @@ def abundant_numbers(limit: int) -> List[int]:
   # return the colllected abundant numbers.
   return result
 
-def unabundant_sum(numbers: List[int], limit: int) -> int:
+def UnabundantSum(numbers: List[int], limit: int) -> int:
   # also use a sieve to find all numbers that aren't sums of two abundant numbers.
   summed = [False]*(limit+1)
   for x in numbers:
@@ -54,10 +54,3 @@ def unabundant_sum(numbers: List[int], limit: int) -> int:
       total += i
 
   return total
-
-
-if __name__ == "__main__":
-  limit = 28123
-  numbers = abundant_numbers(limit)
-  answer = unabundant_sum(numbers, limit)
-  print(answer)

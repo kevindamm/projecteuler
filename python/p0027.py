@@ -24,7 +24,7 @@ from primes import SieveOfEratosthenes
 
 sieve = SieveOfEratosthenes(5*(10**6))
 
-def quadratic_prime_run(a: int, b: int) -> int:
+def QuadraticPrimeRun(a: int, b: int) -> int:
   """Returns the number of successive primes resulting from coefficients a, b.
   
   Using the formula n**2 + a*n + b and n >= 0
@@ -33,17 +33,13 @@ def quadratic_prime_run(a: int, b: int) -> int:
     y = n**2 + a*n + b
     if not sieve.is_prime(y):
       return n
-  print("OOPS! we need a larger range than 1000")
 
 
-if __name__ == "__main__":
-  assert quadratic_prime_run(1, 41) == 40
-  assert quadratic_prime_run(-79, 1601) == 80
-
+def LongestQuadraticPrimeRun(min: int, max: int) -> int:
   answer, longest = 0, 0
-  for a in range(-999, 1000):
-    for b in range(-1000, 1001):
-      runlength = quadratic_prime_run(a, b)
+  for a in range(min, max):
+    for b in range(a, max+1):
+      runlength = QuadraticPrimeRun(a, b)
       if runlength > longest:
         answer, longest = a*b, runlength
-  print(answer)
+  return answer

@@ -38,8 +38,7 @@ def _atoi(digits: str) -> List[int]:
  return [ord(ch)-ord('0') for ch in digits]
 
 
-if __name__ == "__main__":
-  f = open(sys.argv[1])  # pass the path to numbers.txt
-  digits = "".join([line.rstrip() for line in f.readlines()])
-  # print(LargestProductOf(digits, 4))
-  print(LargestProductOf(digits, 25))
+def ParseDigits(filename: str) -> str:
+  with open(filename) as f:
+    return "".join([line.rstrip()
+      for line in f.readlines()])

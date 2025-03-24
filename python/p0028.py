@@ -22,7 +22,7 @@
 
 from typing import List
 
-def number_spiral(size: int) -> List[int]:
+def NumberSpiral(size: int) -> List[int]:
   half = size // 2
   grid = [[0]*size for _ in range(size)]
   i = 2
@@ -50,9 +50,8 @@ def number_spiral(size: int) -> List[int]:
 
   return grid
 
-if __name__ == "__main__":
-  size = 1001
-  grid = number_spiral(size)
+def NumberSpiralDiagonals(size: int) -> int:
+  grid = NumberSpiral(size)
 
   total = 0
   half = size//2
@@ -60,4 +59,5 @@ if __name__ == "__main__":
     total += grid[i][i]
     if i != half:
       total += grid[i][size-i-1]
-  print(total)
+
+  return total

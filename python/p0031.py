@@ -25,6 +25,10 @@ from typing import List
 
 COINS = [200, 100, 50, 20, 10, 5, 2, 1]
 
+def CountChangeCombinations(amount: int) -> int:
+  return len(list(generate_purses(amount, COINS)))
+
+
 def generate_purses(
     total: int,
     coins: List[int],
@@ -48,6 +52,3 @@ def generate_purses(
           purse + [coin],
           amount + coin):
         yield next
-
-if __name__ == "__main__":
-  print(len(list(generate_purses(200, COINS))))

@@ -32,7 +32,3 @@ def LargestPrimeFactor(n: int) -> int:
     while n % prime == 0:
       n /= prime
   return n
-
-if __name__ == "__main__":
-  assert LargestPrimeFactor(13195) == 29
-  print(LargestPrimeFactor(600851475143))

@@ -56,7 +56,7 @@ def remainder(num: int, div: int) -> int:
   return num - (num//div)*div
 
 
-def longest_recurring_cycle_length(limit: int) -> int:
+def LongestRecurringCycleLength(limit: int) -> int:
   """Returns the value (1 .. limit) with the longest recurring cycle length."""
   index, longest = 0, 0
   for i in range(1, limit):
@@ -64,7 +64,3 @@ def longest_recurring_cycle_length(limit: int) -> int:
     if cyclelength > longest:
       index, longest = i, cyclelength
   return index
-
-if __name__ == "__main__":
-  answer = longest_recurring_cycle_length(1000)
-  print(answer)

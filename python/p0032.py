@@ -25,6 +25,14 @@ from typing import Generator
 from typing import List
 from typing import Tuple
 
+
+def SumPandigitalProducts(limit: int) -> int:
+  total = 0
+  for (_, _, product) in pandigital_products(limit):
+    total += product
+  return total
+
+
 def pandigital_products(limit: int) -> Generator[Tuple[int, int, int], None, None]:
   products: Dict[int, bool] = {}
   for i in range(1, limit):
@@ -35,7 +43,6 @@ def pandigital_products(limit: int) -> Generator[Tuple[int, int, int], None, Non
         if not products.get(product):
           products[product] = True
           yield pandigits
-
 
 def digits(value: int) -> List[int]:
   return [int(d) for d in str(value)]
@@ -50,17 +57,3 @@ def is_pandigital(a: int, b: int, product: int) -> bool:
     # Duplicate digits (not pandigital).
     return False
   return True
-
-
-def sum_pandigital_products(limit: int) -> int:
-  total = 0
-  for (_, _, product) in pandigital_products(limit):
-    total += product
-  return total
-
-
-if __name__ == "__main__":
-  print(sum_pandigital_products(140))
-  assert sum_pandigital_products(140) == 5796
-  answer = sum_pandigital_products(10000)
-  print(answer)

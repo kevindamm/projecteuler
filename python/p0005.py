@@ -26,9 +26,10 @@ from typing import Mapping
 from primes import SieveOfEratosthenes
 
 
-def SmallestMultiple(bases: List[int]) -> int:
+def SmallestMultiple(final: int) -> int:
+  bases: List[int] = _naturals_including(final)
   factors: Mapping[int, int] = {}
-  sieve = SieveOfEratosthenes(max(bases[:]))
+  sieve = SieveOfEratosthenes(final)
   for i in bases: # including n
     ifactors = sieve.factors(i)
     for prime, count in ifactors.items():
@@ -42,11 +43,5 @@ def SmallestMultiple(bases: List[int]) -> int:
     product *= prime ** power
   return product
 
-
 def _naturals_including(until: int) -> List[int]:
   return [x for x in range(1, until+1)]
-
-
-if __name__ == "__main__":
-  print("smallest multiple of 1..10 is " +
-        str(SmallestMultiple(_naturals_including(10))))

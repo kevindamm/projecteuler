@@ -20,7 +20,7 @@
 
 """Problem 0025 - 1000-digit Fibonacci Number"""
 
-def first_fib_digits(num_digits: int) -> int:
+def FirstFibDigits(num_digits: int) -> int:
   a, b = 1, 1
   index = 2
   limit = 10**(num_digits-1)
@@ -28,7 +28,3 @@ def first_fib_digits(num_digits: int) -> int:
     a, b = b, a+b
     index += 1
   return index
-
-if __name__ == "__main__":
-  answer = first_fib_digits(1000)
-  print(answer)

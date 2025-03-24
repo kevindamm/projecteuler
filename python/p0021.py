@@ -20,7 +20,7 @@
 
 """Problem 21 - Amicable Numbers"""
 
-def count_amicable(limit: int) -> int:
+def CountAmicable(limit: int) -> int:
   total = 0
   sum_divisors = [0]*limit
 
@@ -40,7 +40,3 @@ def count_amicable(limit: int) -> int:
       total += i + isum
 
   return total
-
-if __name__ == "__main__":
-  answer = count_amicable(10000)
-  print(answer)

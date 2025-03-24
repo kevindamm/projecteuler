@@ -27,9 +27,3 @@ def PythagoreanTripletWithSum(number: int) -> tuple[int, int, int]:
       c2 = a**2 + b**2
       if c**2 == c2:
         return a, b, c
-
-
-if __name__ == "__main__":
-  a, b, c = PythagoreanTripletWithSum(10092)
-  print(a, b, c)
-  print(a*b*c)

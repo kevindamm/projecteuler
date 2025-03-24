@@ -27,7 +27,3 @@ def SumOfPrimesBelow(limit: int) -> int:
   total = sum(sieve.gen_primes())
 
   return total
-
-
-if __name__ == "__main__":
-  print(SumOfPrimesBelow(5_000_000))

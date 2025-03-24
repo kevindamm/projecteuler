@@ -22,7 +22,7 @@
 
 from typing import List
 
-def read_triangle(filepath: str) -> List[List[int]]:
+def ParseTriangle(filepath: str) -> List[List[int]]:
   numbers: List[List[int]] = []
   with open(filepath) as f:
     for line in f.readlines():
@@ -31,9 +31,12 @@ def read_triangle(filepath: str) -> List[List[int]]:
 
   return numbers
 
-def max_route(triangle: List[List[int]]) -> int:
+def MaxRouteInTriangleOfLength(triangle: List[List[int]], limit: int=-1) -> int:
   maxes = []
-  for row in triangle:
+  subtri = triangle
+  if limit > 0:
+    subtri = triangle[:limit]
+  for row in subtri:
     next = []
     if len(row) == 1:
       maxes = row
@@ -46,10 +49,3 @@ def max_route(triangle: List[List[int]]) -> int:
     maxes = next
 
   return max(maxes)
-
-
-if __name__ == "__main__":
-  triangle = read_triangle("./data/0018_triangle.txt")
-  answer = max_route(triangle)
-  print(answer)
-

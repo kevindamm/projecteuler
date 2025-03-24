@@ -48,7 +48,5 @@ def pow_digit_search(pow: int, max_digits: int) -> List[int]:
   return results
 
 
-if __name__ == "__main__":
-  assert sum(pow_digit_search(4, 4)) == 19316
-  found = pow_digit_search(5, 6)
-  print(sum(found))
+def SumPowDigitSearch(power: int, digits: int) -> int:
+  return sum(pow_digit_search(power, digits))

@@ -31,8 +31,3 @@ def NthPrime(count: int) -> int:
       return prime
 
   assert False
-
-
-if __name__ == "__main__":
-  # print(NthPrime(6))
-  print(NthPrime(10001))

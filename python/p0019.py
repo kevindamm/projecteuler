@@ -31,7 +31,7 @@ def count_sundays(start: date, limit: date) -> int:
     current += timedelta(days=1)
   return total
 
-
-if __name__ == "__main__":
-  counted = count_sundays(date(1901, 1, 1), date(2000, 12, 31))
-  print(counted)
+def CountSundaysInRange(startDate: tuple[int, int, int], finalDate: tuple[int, int, int]) -> int:
+  return count_sundays(
+    date(startDate[0], startDate[1], startDate[2]),
+    date(finalDate[0], finalDate[1], finalDate[2]))
