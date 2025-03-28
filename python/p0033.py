@@ -21,9 +21,9 @@
 """Problem 0033 - Digit Cancelling Fractions"""
 
 from math import prod
-from typing import List
+from typing import List, Tuple
 
-def DenominatorDCF() -> int:
+def DenominatorDCF() -> Tuple[List[int], List[int]]:
   nums: List[int] = []
   denoms: List[int] = []
 
@@ -56,9 +56,3 @@ def naive_reduction(n1, d1, n2, d2):
   if n1 / d1 != n2 / d2:
     return False
   return True
-
-
-if __name__ == "__main__":
-  nums, denoms = DenominatorDCF()
-  answer = product_reduced_denom(nums, denoms)
-  print(answer)

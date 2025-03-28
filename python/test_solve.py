@@ -235,3 +235,21 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0032.SumPandigitalProducts(140),
       5796)
+
+  def test_p0033(self):
+    import p0033
+    nums, denoms = p0033.DenominatorDCF()
+    self.assertEqual(len(nums), 4)
+    self.assertEqual(len(denoms), 4)
+
+  def test_p0034(self):
+    import p0034
+    self.assertEqual(
+      p0034.DigitFactorials(1000)[0],
+      145)
+
+  def test_p0033(self):
+    import p0035
+    self.assertEqual(
+      p0035.CountCircularPrimes(2),
+      13)

@@ -18,29 +18,45 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Problem 0034 - Digit Factorials"""
+"""Problem 0035 - Circular Primes"""
 
-from math import prod
-from typing import List
+from primes import SieveOfEratosthenes
+from typing import Generator, List
 
-def DigitFactorials(limit: int) -> List[int]:
-  found: List[int] = []
-  for x in range(10, limit):
-    if is_digit_factorial(x):
-      found.append(x)
-  return found
+def CountCircularPrimes(digits: int) -> int:
+  count = 0
 
-def is_digit_factorial(x: int) -> bool:
-  digits = digit_parts(x)
-  xform = sum(fact(digit) for digit in digits)
-  return xform == x
+  limit = 10**digits
+  sieve = SieveOfEratosthenes(limit)
+  visited = {} # int -> bool
+  for prime in sieve.gen_primes():
+    if visited.get(prime, False):
+      continue
 
-def digit_parts(x: int) -> List[int]:
+    for number in rotations(prime):
+      if not sieve.is_prime(number):
+        break
+      else:
+        visited[prime] = True
+    else:
+      count += 1
+
+  return count
+
+def rotations(number: int) -> Generator[int, None, None]:
   digits: List[int] = []
-  while x > 0:
-    digits.append(x%10)
-    x //= 10
-  return digits
+  while number > 0:
+    digits.append(number % 10)
+    number //= 10
+  digits.reverse()
 
-def fact(x: int) -> int:
-  return prod(range(2, x+1))
+  for i in range(1, len(digits)):
+    yield combine(digits[i:], digits[:i])
+
+def combine(left: List[int], right: List[int]) -> int:
+  value = 0
+  for digit in left:
+    value = (value * 10) + digit
+  for digit in right:
+    value = (value * 10) + digit
+  return value
