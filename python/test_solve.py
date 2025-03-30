@@ -248,8 +248,14 @@ class TestAllSolutions(unittest.TestCase):
       p0034.DigitFactorials(1000)[0],
       145)
 
-  def test_p0033(self):
+  def test_p0035(self):
     import p0035
     self.assertEqual(
       p0035.CountCircularPrimes(2),
       13)
+
+  def test_p0036(self):
+    import p0036
+    self.assertEqual(
+      p0036.SumOfBinaryAndDecimalPalindromes(1000),
+      1772)
