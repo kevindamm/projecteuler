@@ -18,33 +18,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Problem 0038 - Pandigital Multiples"""
+import unittest
+from digits import digits_of, from_digits
 
-from typing import List
+class TestDigits(unittest.TestCase):
 
-from digits import digits_of
+  def test_int_to_list(self):
+    self.assertEqual(
+      digits_of(246897531),
+      [1, 3, 5, 7, 9, 8, 6, 4, 2])
 
-def PandigitalMultiples(limit: int) -> List[int]:
-  pandigitals: List = []
-  for number in range(1,limit):
-    if number < 10: continue
-    pandigi = pandigital_prod(number)
-    if pandigi > 0:
-      pandigitals.append(pandigi)
+  def test_list_to_int(self):
+    self.assertEqual(
+      from_digits([2, 4, 6, 8, 9, 7, 5, 3, 1]),
+      135798642)
 
-  return pandigitals
-
-def pandigital_prod(value: int) -> int:
-  digits = set(range(1,10))
-  base, i, pandigital = value, 1, 0
-  while len(digits) > 0:
-    value_digits = digits_of(value)
-    for digit in value_digits:
-      if digit == 0 or digit not in digits:
-        return False
-      digits.remove(digit)
-
-    pandigital = (pandigital * 10**len(value_digits)) + value
-    i += 1
-    value = base * i
-  return pandigital
+  def test_roundtrip(self):
+    number = 12341
+    self.assertEqual(from_digits(digits_of(number)),
+                     number)

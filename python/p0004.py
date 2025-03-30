@@ -20,6 +20,8 @@
 
 """Problem 0004 - Largest Palindrome Product"""
 
+from digits import digits_of
+
 def FindLargestPalindromeProduct(limit: int) -> int:
   largest = 0
   for i in range(limit-1,0,-1):
@@ -31,7 +33,7 @@ def FindLargestPalindromeProduct(limit: int) -> int:
   return largest
 
 def is_palindromic(n: int) -> bool:
-  digits = str(n)
+  digits = digits_of(n)
   i, j = 0, len(digits)-1
   while i <= j:
     if digits[i] != digits[j]:

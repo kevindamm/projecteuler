@@ -23,6 +23,9 @@
 from primes import SieveOfEratosthenes
 from typing import Generator, List
 
+from digits import digits_of
+
+
 def CountCircularPrimes(digits: int) -> int:
   count = 0
 
@@ -44,12 +47,7 @@ def CountCircularPrimes(digits: int) -> int:
   return count
 
 def rotations(number: int) -> Generator[int, None, None]:
-  digits: List[int] = []
-  while number > 0:
-    digits.append(number % 10)
-    number //= 10
-  digits.reverse()
-
+  digits = list(digits_of(number)[::-1])
   for i in range(1, len(digits)):
     yield combine(digits[i:], digits[:i])
 

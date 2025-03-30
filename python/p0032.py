@@ -25,6 +25,8 @@ from typing import Generator
 from typing import List
 from typing import Tuple
 
+from digits import digits_of
+
 
 def SumPandigitalProducts(limit: int) -> int:
   total = 0
@@ -38,17 +40,14 @@ def pandigital_products(limit: int) -> Generator[Tuple[int, int, int], None, Non
   for i in range(1, limit):
     for j in range(i+1, limit):
       product = i * j
-      if is_pandigital(i, j, product):
+      if is_pandigital_triplet(i, j, product):
         pandigits = (i, j, product)
         if not products.get(product):
           products[product] = True
           yield pandigits
 
-def digits(value: int) -> List[int]:
-  return [int(d) for d in str(value)]
-
-def is_pandigital(a: int, b: int, product: int) -> bool:
-  da, db, dp = digits(a), digits(b), digits(product)
+def is_pandigital_triplet(a: int, b: int, product: int) -> bool:
+  da, db, dp = digits_of(a), digits_of(b), digits_of(product)
   if len(da) + len(db) + len(dp) > 9:
     # Pigeonhole Principle.
     return False

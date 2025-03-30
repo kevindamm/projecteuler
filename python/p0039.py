@@ -20,6 +20,8 @@
 
 """Problem 39 - Integer Right Triangles"""
 
+# This is similar to problem 0009 but counts
+# the triplets instead of finding only the first.
 def CountIntegerRightTriangles(p: int) -> int:
   count = 0
 

@@ -18,13 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from digits import digits_of
+
 def FactorialDigitSum(n: int) -> int:
   result = 1
   for x in range(2,n+1):
     result *= x
   
-  digitsum = 0
-  while result > 0:
-    digitsum += result % 10
-    result = result // 10
-  return digitsum
+  return sum(digits_of(result))

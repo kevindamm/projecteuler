@@ -20,8 +20,11 @@
 
 """Problem 0034 - Digit Factorials"""
 
+from functools import lru_cache
 from math import prod
 from typing import List
+
+from digits import digits_of
 
 def DigitFactorials(limit: int) -> List[int]:
   found: List[int] = []
@@ -31,16 +34,11 @@ def DigitFactorials(limit: int) -> List[int]:
   return found
 
 def is_digit_factorial(x: int) -> bool:
-  digits = digit_parts(x)
-  xform = sum(fact(digit) for digit in digits)
-  return xform == x
+  return x == sum(
+    fact(digit) for digit in digits_of(x))
 
-def digit_parts(x: int) -> List[int]:
-  digits: List[int] = []
-  while x > 0:
-    digits.append(x%10)
-    x //= 10
-  return digits
-
+@lru_cache(maxsize=None)
 def fact(x: int) -> int:
-  return prod(range(2, x+1))
+  if x <= 1:
+    return 1
+  return x*fact(x-1)

@@ -22,7 +22,6 @@
 
 from functools import reduce
 import operator
-import sys
 from typing import List
 
 def LargestProductOf(digits: str, count: int) -> int:

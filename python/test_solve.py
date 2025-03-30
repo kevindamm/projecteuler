@@ -120,7 +120,7 @@ class TestAllSolutions(unittest.TestCase):
   def test_p0016(self):
     import p0016
     self.assertEqual(
-      p0016.PowDigitSum(15),
+      p0016.PowerDigitSum(15),
       26)
 
   def test_p0017(self):

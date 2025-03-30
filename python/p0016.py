@@ -18,9 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def PowDigitSum(bits: int) -> int:
-  sum = 0
-  digits = str(2**bits)
-  for ch in digits:
-    sum += ord(ch)-ord('0')
-  return sum
+from digits import digits_of
+
+def PowerDigitSum(bits: int) -> int:
+  value = 1<<bits
+  return sum(digits_of(value))
