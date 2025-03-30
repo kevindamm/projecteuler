@@ -12,7 +12,7 @@
 import path from 'node:path';
 import { existsSync } from 'node:fs';
 import { Buffer } from 'node:buffer';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 if (!process.argv[2]) {
   console.error('must call with a numeric argument (the problem ID)');
@@ -28,10 +28,14 @@ const digits_padded = String(problem_number).padStart(4, '0');
 const filepath = path.join('.', 'python',
   'p'.concat(digits_padded).concat('.py'));
 if (existsSync(filepath)) {
-  error(`File ${filepath} already exists, ` +
+  console.error(`File ${filepath} already exists, ` +
     `delete it first if you intended to overwrite it.`);
   process.exit(1);
 }
+
+const { titles } = JSON.parse(await readFile("./public/pe100.json", "utf8"))
+const problem_title = title_if_known(problem_number)
+const title_fn = fnname_from_title(problem_title)
 
 // If you aren't me, feel free to change the author name.
 const template = `# Copyright (c) 2025 Kevin Damm
@@ -56,9 +60,14 @@ const template = `# Copyright (c) 2025 Kevin Damm
 #
 # github:kevindamm/projecteuler/python/p${digits_padded}.py
 
+"""Problem ${problem_number} - ${problem_title}"""
+
+def ${title_fn}(value: int) -> int:
+  pass
+
 
 if __name__ == "__main__":
-  pass
+  print(${title_fn}())
 `;
 
 
@@ -72,3 +81,20 @@ try {
 
 console.log(`Done writing Python boilerplate to ${filepath}.`);
 process.exit(0);
+
+
+function title_if_known(pe_num) {
+  if (!pe_num ||
+    typeof(pe_num) != "number" ||
+    pe_num < 1 || pe_num >= titles.length) {
+    return titles[0];
+  }
+  return titles[pe_num];
+}
+
+function fnname_from_title(title) {
+  if (!title || title === titles[0]) {
+    return "SolutionFunction";
+  }
+  return title.replaceAll(/ (\w)/g, (match) => match.slice(1).toUpperCase());
+}

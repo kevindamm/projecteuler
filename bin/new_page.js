@@ -2,18 +2,17 @@
 
 /**
  * @file new_page.js
- * @example npm x begin 42 "Coded Triangle Numbers"
+ * @example npm x begin 42
  * 
  * Simple Node.js script for generating the boilerplate of a new blog post.
  * 
  * @param integer (required) the problem number (according to ProjectEuler.net)
- * @param string (optional) the problem's title (it can be defined later).
  */
 
 import path from 'node:path';
 import { existsSync } from 'node:fs';
 import { Buffer } from 'node:buffer';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 import fetch from 'node-fetch';
 
@@ -33,7 +32,8 @@ if (existsSync(filepath)) {
 log(`Generating new article page for ${filepath} ...`);
 
 
-const title = argvProblemTitle();
+const { titles } = JSON.parse(await readFile("./public/pe100.json", "utf-8"))
+const title = title_if_known(titles, problem_number)
 const problem_description = await fetchDescription(problem_number);
 
 // If you aren't me, feel free to change the author name and other frontmatter.
@@ -87,12 +87,15 @@ function argvProblemNumber() {
   return problem_number
 }
 
-// The second argument is optional, interpreted as the problem title.
-// TODO: consider using a command-line flag for this instead.
-function argvProblemTitle() {
-  return process.argv[3] || 'undefined problem title';
+// retrieves the title for any problem between #1 to #100.
+function title_if_known(titles, pe_num) {
+  if (!pe_num ||
+    typeof(pe_num) != "number" ||
+    pe_num < 1 || pe_num >= titles.length) {
+    return titles[0] || "<<UNK>>";
+  }
+  return titles[pe_num];
 }
-
 
 // Fetches from projecteuler.net the LaTeX-formatted problem description.
 async function fetchDescription(problem_number) {
