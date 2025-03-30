@@ -271,3 +271,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       min(p0038.PandigitalMultiples(1000)),
       192384576)
+
+  def test_p0039(self):
+    import p0039
+    self.assertEqual(
+      p0039.CountIntegerRightTriangles(120),
+      3)
