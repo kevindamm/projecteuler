@@ -259,3 +259,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0036.SumOfBinaryAndDecimalPalindromes(1000),
       1772)
+
+  def test_p0037(self):
+    import p0037
+    self.assertEqual(
+      len(p0037.TruncatablePrimes(10**6)),
+      11)
