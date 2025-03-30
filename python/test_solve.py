@@ -265,3 +265,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       len(p0037.TruncatablePrimes(10**6)),
       11)
+
+  def test_p0038(self):
+    import p0038
+    self.assertEqual(
+      min(p0038.PandigitalMultiples(1000)),
+      192384576)
