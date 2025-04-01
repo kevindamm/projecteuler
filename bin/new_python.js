@@ -12,7 +12,7 @@
 import path from 'node:path';
 import { existsSync } from 'node:fs';
 import { Buffer } from 'node:buffer';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 
 if (!process.argv[2]) {
   console.error('must call with a numeric argument (the problem ID)');
@@ -24,21 +24,32 @@ if (!problem_number) {
   process.exit(1);
 }
 
+const project_rootdir = process.env.INIT_CWD;
 const digits_padded = String(problem_number).padStart(4, '0');
-const filepath = path.join('.', 'python',
+const filepath = path.join(project_rootdir, 'python');
+
+if (!existsSync(filepath)) {
+  console.error(`File directory ${filepath} not found.
+   Make sure process.env is initialized (are you running with npm x?)`);
+  process.exit(1);
+}
+
+const src_filepath = path.join(filepath,
   'p'.concat(digits_padded).concat('.py'));
-if (existsSync(filepath)) {
+
+if (existsSync(src_filepath)) {
   console.error(`File ${filepath} already exists, ` +
     `delete it first if you intended to overwrite it.`);
   process.exit(1);
 }
+const test_filepath = path.join(filepath, "test_solve.py")
 
-const { titles } = JSON.parse(await readFile("./public/pe100.json", "utf8"))
-const problem_title = title_if_known(problem_number)
-const title_fn = fnname_from_title(problem_title)
+const titles = await readTitles();
+const problem_title = titleIfKnown(problem_number);
+const title_fn = fnNameFromTitle(problem_title);
 
 // If you aren't me, feel free to change the author name.
-const template = `# Copyright (c) 2025 Kevin Damm
+const src_boilerplate = `# Copyright (c) 2025 Kevin Damm
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -71,19 +82,40 @@ if __name__ == "__main__":
 `;
 
 
+const module = `p${digits_padded}`;
+const test_boilerplate = `
+  def test_${module}(self):
+    import ${module}
+    self.assertEqual(
+      ${module}.${title_fn}(),
+      )#answer
+`;
+
+
 try {
-  await writeFile(
-    filepath,
-    new Uint8Array(Buffer.from(template)));
+  await writeFileSync(
+    src_filepath,
+    new Uint8Array(Buffer.from(src_boilerplate)));
+  console.log(`Successfully wrote Python boilerplate to ${src_filepath}.`);
+
+  await appendFileSync(
+    test_filepath,
+    new Uint8Array(Buffer.from(test_boilerplate)));
+  console.log(`Successfully wrote Python boilerplate to ${test_filepath}.`);
 } catch (err) {
   console.error(err);
 }
 
-console.log(`Done writing Python boilerplate to ${filepath}.`);
+
 process.exit(0);
 
 
-function title_if_known(pe_num) {
+async function readTitles() {
+  const metadata = JSON.parse(readFileSync("public/pe100.json", "utf8"));
+  return metadata?.titles;
+}
+
+function titleIfKnown(pe_num) {
   if (!pe_num ||
     typeof(pe_num) != "number" ||
     pe_num < 1 || pe_num >= titles.length) {
@@ -92,7 +124,7 @@ function title_if_known(pe_num) {
   return titles[pe_num];
 }
 
-function fnname_from_title(title) {
+function fnNameFromTitle(title) {
   if (!title || title === titles[0]) {
     return "SolutionFunction";
   }
