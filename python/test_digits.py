@@ -19,7 +19,7 @@
 # SOFTWARE.
 
 import unittest
-from digits import digits_of, from_digits
+from digits import *
 
 class TestDigits(unittest.TestCase):
 
@@ -37,3 +37,21 @@ class TestDigits(unittest.TestCase):
     number = 12341
     self.assertEqual(from_digits(digits_of(number)),
                      number)
+
+  def test_pandigital(self):
+    self.assertFalse(is_pandigital([1, 2, 4, 5]))
+    self.assertFalse(is_pandigital([1, 2, 3, 3]))
+    self.assertFalse(is_pandigital([9, 8, 7, 6, 5, 4, 3, 0, 1]))
+    self.assertFalse(is_pandigital([9, 8, 7, 6, 5, 4, 3, 2, 1, 1]))
+
+    self.assertTrue(is_pandigital([1, 2, 3, 4]))
+    self.assertTrue(is_pandigital([9, 8, 7, 6, 5, 4, 3, 2, 1]))
+
+  def test_pandigital_int(self):
+    self.assertFalse(is_pandigital_int(12341))
+    self.assertFalse(is_pandigital_int(234))
+    self.assertFalse(is_pandigital_int(875312640))
+
+    self.assertTrue(is_pandigital_int(2314))
+    self.assertTrue(is_pandigital_int(123))
+    self.assertTrue(is_pandigital_int(975312648))

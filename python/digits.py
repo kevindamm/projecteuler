@@ -28,6 +28,7 @@ numeric process.  A PE100 solution may still defer to string representations if
 doing so leads to more readable code or does not effect main-loop performance.
 """
 
+from math import floor, log10
 from typing import List
 
 def digits_of(value: int) -> List[int]:
@@ -53,3 +54,28 @@ def from_digits(digits: List[int]) -> int:
     value += tens * digit
     tens *= 10
   return value
+
+def is_pandigital_int(number: int) -> bool:
+  """Returns true if the number has one of each digit for as many digits it has.
+
+  Excludes zero and single-digit values.
+  """
+  if number < 12: return False
+  size = floor(log10(number))+1
+  digits = digits_of(number)
+  if len(digits) != size:
+    return False
+  return is_pandigital(digits)
+  
+def is_pandigital(digits: List[int]) -> bool:
+  """Returns true if the digits are unique from 1..n,
+  
+  All digits must be nonzero and no larger than the number of digits.
+  """
+  digitset = set(range(1,len(digits)+1))
+  for digit in digits:
+    if digit in digitset:
+      digitset.remove(digit)
+    else:
+      return False
+  return True
