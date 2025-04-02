@@ -293,3 +293,11 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0041.LargestPandigitalPrime(5),
       4231)
+
+  def test_p0042(self):
+    import p0042
+    words = p0042.ParseWords("../public/data/0042_words.txt")
+    words = words[:100]
+    self.assertEqual(
+      p0042.CountCodedTriangleNumbers(words),
+      14)
