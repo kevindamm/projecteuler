@@ -20,31 +20,28 @@
 
 """Problem 0038 - Pandigital Multiples"""
 
+from typing import Generator
 from typing import List
 
-from digits import digits_of
+from digits import digits_of, from_digits, is_pandigital
 
 def PandigitalMultiples(limit: int) -> List[int]:
-  pandigitals: List = []
+  pandigitals: List[int] = []
   for number in range(1,limit):
-    if number < 10: continue
-    pandigi = pandigital_prod(number)
-    if pandigi > 0:
-      pandigitals.append(pandigi)
+    if number < 12: continue
+
+    for digits in multidigital9(number):
+      if is_pandigital(digits):
+        pandigitals.append(from_digits(digits))
 
   return pandigitals
 
-def pandigital_prod(value: int) -> int:
-  digits = set(range(1,10))
-  base, i, pandigital = value, 1, 0
-  while len(digits) > 0:
-    value_digits = digits_of(value)
-    for digit in value_digits:
-      if digit == 0 or digit not in digits:
-        return False
-      digits.remove(digit)
 
-    pandigital = (pandigital * 10**len(value_digits)) + value
-    i += 1
-    value = base * i
-  return pandigital
+def multidigital9(unit: int) -> Generator[List[int], None, None]:
+  digits: List[int] = []
+  a = 1
+  while len(digits) < 9:
+    digits = digits_of(a*unit) + digits
+    a += 1
+  if len(digits) == 9:
+    yield digits

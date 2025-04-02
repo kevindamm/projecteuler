@@ -277,3 +277,19 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0039.CountIntegerRightTriangles(120),
       3)
+
+  def test_p0040(self):
+    import p0040
+    digit = p0040.DigitOfChampernowneConstant
+    self.assertEqual(digit(7), 7)
+    self.assertEqual(digit(10), 1)
+    self.assertEqual(digit(11), 0)
+    self.assertEqual(digit(17), 3)
+    self.assertEqual(digit(210), 1)
+    self.assertEqual(digit(212), 0)
+
+  def test_p0041(self):
+    import p0041
+    self.assertEqual(
+      p0041.LargestPandigitalPrime(5),
+      4231)

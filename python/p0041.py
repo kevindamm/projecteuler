@@ -22,31 +22,16 @@
 
 """Problem 41 - Pandigital Prime"""
 
-from typing import List
 
-from digits import digits_of
+from digits import is_pandigital_int
 from primes import SieveOfEratosthenes
 
+def LargestPandigitalPrime(log_limit: int) -> int:
+  largest = 0
 
-def PandigitalPrime(size: int) -> int:
-  sieve = SieveOfEratosthenes(10**size)
+  sieve = SieveOfEratosthenes(10**log_limit)
   for prime in sieve.gen_primes():
-    if is_pandigital(prime, size):
-      print(prime)
+    if is_pandigital_int(prime):
+      largest = prime
 
-def is_pandigital(number: int, size: int):
-  num_digits = digits_of(number)
-  if len(num_digits) != size:
-    return False
-  
-  digits = set(range(1, size+1))
-  for digit in num_digits:
-    if digit in digits:
-      digits.remove(digit)
-    else:
-      return False
-  return True
-
-
-if __name__ == "__main__":
-  print(PandigitalPrime(7))
+  return largest
