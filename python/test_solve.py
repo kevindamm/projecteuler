@@ -307,3 +307,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       sum(p0043.SubstringDivisibility(5)),
       697328)
+
+  def test_p0044(self):
+    import p0044
+    self.assertEqual(
+      max(p0044.PentagonNumbers(100)),
+      14950)
