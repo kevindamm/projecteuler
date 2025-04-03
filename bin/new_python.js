@@ -128,5 +128,7 @@ function fnNameFromTitle(title) {
   if (!title || title === titles[0]) {
     return "SolutionFunction";
   }
-  return title.replaceAll(/ (\w)/g, (match) => match.slice(1).toUpperCase());
+  return title.
+    replaceAll(/[_\t-]/g, "").
+    replaceAll(/[\s-]([\w\d])/g, (match) => match.slice(1).toUpperCase());
 }
