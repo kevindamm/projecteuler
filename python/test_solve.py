@@ -301,3 +301,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0042.CountCodedTriangleNumbers(words),
       14)
+
+  def test_p0043(self):
+    import p0043
+    self.assertEqual(
+      sum(p0043.SubstringDivisibility(5)),
+      697328)
