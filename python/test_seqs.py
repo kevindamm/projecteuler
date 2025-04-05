@@ -98,3 +98,15 @@ class TestSequences(unittest.TestCase):
       for nontri in range(prev+1, number):
         self.assertFalse(is_pentagonal(nontri))
       prev = number
+
+  def test_hexagon_checks(self):
+    prev = 0
+    for number in gen_hexagonal(100):
+      self.assertTrue(is_hexagonal(number))
+      if prev == 0:
+        prev = number
+        continue
+      for nontri in range(prev+1, number):
+        self.assertFalse(is_hexagonal(nontri))
+      prev = number
+

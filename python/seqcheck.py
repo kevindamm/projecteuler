@@ -48,3 +48,16 @@ def is_pentagonal(x: int) -> bool:
   t = 24 * x + 1
   y = int(sqrt(t))
   return (y*y == t and y % 6 == 5)
+
+def is_hexagonal(x: int) -> bool:
+  """Take the hexagonal root of x to determine if it is a hexagonal number.
+  
+  Let H_n = x, then via the quadratic formula we can find
+    n = (sqrt(8x + 1) + 1) / 4
+
+  If we test this resulting n for being an integer value (the subresult being
+  evenly divisible by 4) then we know that x is a hexagonal number.
+  """
+  t = 8 * x + 1
+  y = int(sqrt(t))
+  return (y*y == t and y % 4 == 3)
