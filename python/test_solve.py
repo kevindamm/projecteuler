@@ -325,3 +325,12 @@ class TestAllSolutions(unittest.TestCase):
     self.assertGreater(
       p0046.SmallestGoldbachCounterexample(),
       5000)
+
+  def test_p0047(self):
+    import p0047
+    self.assertEqual(
+      p0047.DistinctPrimesFactors(2),
+      14)
+    self.assertEqual(
+      p0047.DistinctPrimesFactors(3),
+      644)
