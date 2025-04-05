@@ -22,13 +22,6 @@ import unittest
 from sequences import *
 from seqcheck import *
 
-def nth(generator: Generator[int, None, None], n: int) -> int:
-  value = 0
-  while n > 0:
-    value = next(generator)
-    n -= 1
-  return value
-
 class TestSequences(unittest.TestCase):
 
   def test_triangles(self):

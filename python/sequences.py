@@ -84,3 +84,12 @@ def gen_sequence(fn: Callable[[int], int],
   while not count or count >= n:
     yield fn(n)
     n += 1
+
+
+def nth(generator: Generator[int, None, None], n: int) -> int:
+  """Pull from a generator N times and return the nth value."""
+  value = 0
+  while n > 0:
+    value = next(generator)
+    n -= 1
+  return value

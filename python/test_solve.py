@@ -313,3 +313,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       max(gen_pentagonal(100, 99)),
       14950)
+
+  def test_p0045(self):
+    import p0045
+    self.assertEqual(
+      p0045.TriangularPentagonalHexagonalNumbers(1),
+      40755)
