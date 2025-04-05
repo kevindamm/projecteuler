@@ -129,6 +129,6 @@ function fnNameFromTitle(title) {
     return "SolutionFunction";
   }
   return title.
-    replaceAll(/[_\t-]/g, "").
+    replaceAll(/[_\t,-]/g, "").
     replaceAll(/[\s-]([\w\d])/g, (match) => match.slice(1).toUpperCase());
 }
