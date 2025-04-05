@@ -309,7 +309,7 @@ class TestAllSolutions(unittest.TestCase):
       697328)
 
   def test_p0044(self):
-    import p0044
+    from sequences import gen_pentagonal
     self.assertEqual(
-      max(p0044.PentagonNumbers(100)),
+      max(gen_pentagonal(100, 99)),
       14950)

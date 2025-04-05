@@ -17,29 +17,34 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-#
-# github:kevindamm/projecteuler/python/p0044.py
 
-"""Problem 44 - Pentagon Numbers"""
+from math import sqrt
 
-from typing import Generator
-
-from sequences import gen_pentagonal
-from seqcheck import is_pentagonal
+"""See also sequences.py in this directory for generators that produce these."""
 
 
-def FirstPentagonDifferenceAndSum() -> int:
-  """Find the Pentagonal numbers Pj and Pk where their sum and difference are
-  also pentagonal numbers D = (Pk - Pj) and S = (Pj + Pk), with smallest Pj.
+def is_triangular(x: int) -> bool:
+  """Take the partial triangular root of x to determine if x is triangular.
   
-  I'm assuming here that the first encountered (min Pj)
-  will also minimize the difference (as required by the problem).
+  Let T_n = x, then via the quadratic formula we can find
+    n = (sqrt(8x + 1) - 1) / 2
   
-  Fortunately I was correct, but was prepared to modify the search.
-  Intuitively, for a difference to be any smaller it would be bounded
-  within the Pj and Pk when minimizing Pj.  But D was of that pair alredy.
+  If sqrt(8x + 1) is an integer then x is a triangular number.
   """
-  for i, j in enumerate(gen_pentagonal()):
-    for k in gen_pentagonal(10000, i+2):
-      if is_pentagonal(k-j) and is_pentagonal(k+j):
-        return k - j
+  t = 8 * x + 1
+  y = int(sqrt(t))
+  return y*y == t
+
+def is_pentagonal(x: int) -> bool:
+  """Take the partial pentagonal root of x to determine if x is pentagonal.
+  
+  Let P_n = x, then via the quadratic formula we can find
+    n = (sqrt(24x + 1) + 1) / 2
+
+  If sqrt(24x + 1) is a natural number then x is a generalized pentagonal
+  number.  It is also required to check that it is 5 mod 6 to be congruent with
+  the pentagonal sequence as defined by these Project Euler problems.
+  """
+  t = 24 * x + 1
+  y = int(sqrt(t))
+  return (y*y == t and y % 6 == 5)
