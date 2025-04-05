@@ -334,3 +334,12 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0047.DistinctPrimesFactors(3),
       644)
+
+  def test_p0048(self):
+    import p0048
+    self.assertEqual(
+      p0048.SelfPowers(10),
+      405071317)
+    self.assertEqual(
+      p0048.SelfPowers(50),
+      9454417125)
