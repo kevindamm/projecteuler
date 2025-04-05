@@ -311,7 +311,7 @@ class TestAllSolutions(unittest.TestCase):
   def test_p0044(self):
     from sequences import gen_pentagonal
     self.assertEqual(
-      max(gen_pentagonal(100, 99)),
+      max(gen_pentagonal(100, start=99)),
       14950)
 
   def test_p0045(self):
@@ -319,3 +319,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0045.TriangularPentagonalHexagonalNumbers(1),
       40755)
+
+  def test_p0046(self):
+    import p0046
+    self.assertGreater(
+      p0046.SmallestGoldbachCounterexample(),
+      5000)
