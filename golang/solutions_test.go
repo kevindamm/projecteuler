@@ -164,6 +164,13 @@ func TestAllProblems(t *testing.T) {
 		{"p0023",
 			func() int64 { return solutions.NonAbundantSumsUnder(250) },
 			15891},
+
+		{"p0024",
+			func() int64 {
+				return solutions.LexicographicPermutations(
+					[]int{3, 1, 2, 4}, 2)
+			},
+			1243},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
