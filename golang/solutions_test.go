@@ -171,6 +171,10 @@ func TestAllProblems(t *testing.T) {
 					[]int{3, 1, 2, 4}, 2)
 			},
 			1243},
+
+		{"p0025",
+			func() int64 { return solutions.NthFibonacciExceedingDigits(100) },
+			476},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
