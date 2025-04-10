@@ -175,6 +175,10 @@ func TestAllProblems(t *testing.T) {
 		{"p0025",
 			func() int64 { return solutions.NthFibonacciExceedingDigits(100) },
 			476},
+
+		{"p0026",
+			func() int64 { return int64(solutions.LongestReciprocalCycleLength(100)) },
+			97},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

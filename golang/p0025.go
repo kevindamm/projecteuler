@@ -26,7 +26,23 @@ import (
 	"math/big"
 )
 
-func NthFibonacciExceedingDigits(num_digits int) int64 {
+var NthFibonacciExceedingDigits = NthFibonacciExceedingDigitsStrlen
+
+func NthFibonacciExceedingDigitsStrlen(num_digits int) int64 {
+	a, b := big.NewInt(1), big.NewInt(1)
+	nth := int64(2)
+	next := b
+
+	for ; len(next.String()) < num_digits; nth++ {
+		next = new(big.Int).Add(a, b)
+		a = b
+		b = next
+	}
+
+	return nth
+}
+
+func NthFibonacciExceedingDigitsCompareBigInt(num_digits int) int64 {
 	a, b := big.NewInt(1), big.NewInt(1)
 	i := int64(2)
 	ten := big.NewInt(10)
