@@ -186,6 +186,10 @@ func TestAllProblems(t *testing.T) {
 		{"p0027-b",
 			func() int64 { return solutions.QuadraticPrimeRun(-79, 1601) },
 			80},
+
+		{"p0028",
+			func() int64 { return solutions.NumberSpiralDiagonals(101) },
+			692101},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
