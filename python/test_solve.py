@@ -343,3 +343,9 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0048.SelfPowers(50),
       9454417125)
+
+  def test_p0049(self):
+    import p0049
+    self.assertEqual(
+      p0049.PrimePermutationsOfFourDigits()[0],
+      "148748178147")
