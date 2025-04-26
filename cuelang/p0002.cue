@@ -25,7 +25,7 @@ import (
   "math"
 )
 
-#limit: *4_500_000 | float @tag(N,type=number)
+#limit: *4_000_000 | float @tag(N,type=number)
 
 _sqrt_five:  math.Pow(5.0, 0.5)
 _Phi: (_sqrt_five + 1.0) / 2.0
@@ -36,8 +36,8 @@ _#calc: {
 	f: math.Round((math.Pow(_Phi, n) - math.Pow(_phi, n)) / _sqrt_five)
 }
 
-_max_n: math.Round(math.Log((#limit) * _sqrt_five) / math.Log(_Phi))
-_nums: list.Range(1, _max_n, 1)
+_max_n: math.Floor(math.Log((#limit + 0.5) * _sqrt_five) / math.Log(_Phi))
+_nums: list.Range(1, _max_n + 1, 1)
 
 _fibs: [ for i, I in _nums {(_#calc & {n: I}).f}]
 _even_fibs: [for x in _fibs if rem(x, 2) == 0 {x}]
