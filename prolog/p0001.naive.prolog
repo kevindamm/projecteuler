@@ -20,7 +20,6 @@
 %
 % github:kevindamm/projecteuler/golang/p0001.naive.prolog
 
-
 % Sum is the sum of multiples of {3, 5} below N.
 sum_multiples(N, Sum) :-
   sum_multiples_naive(N-1, 0, Sum).

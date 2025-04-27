@@ -15,9 +15,6 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
 
-const props = defineProps<{
-}>()
-
 const {
   limit = 1000,
   factors = "3,5",
