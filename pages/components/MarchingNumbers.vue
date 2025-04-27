@@ -13,17 +13,25 @@
 
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, defineProps } from 'vue'
+
+const props = defineProps<{
+}>()
 
 const {
   limit = 1000,
+  factors = "3,5",
   delay_millis = 500,
 } = defineProps<{
-  limit: number;
+  limit?: number;
+  factors: string;
+  inert?: boolean;
   delay_millis: number;
 }>()
 
 const count = ref(1)
+const v = factors.split(",").map((x) => Number(x))
+
 const increment = () => {
   count.value++
   if (count.value < limit) {
