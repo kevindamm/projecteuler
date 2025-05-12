@@ -349,3 +349,10 @@ class TestAllSolutions(unittest.TestCase):
     self.assertEqual(
       p0049.PrimePermutationsOfFourDigits()[0],
       "148748178147")
+
+  def test_p0050(self):
+    import p0050
+    self.assertEqual(
+      p0050.ConsecutivePrimeSum(100), 41)
+    self.assertEqual(
+      p0050.ConsecutivePrimeSum(1000), 953)

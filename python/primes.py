@@ -54,11 +54,14 @@ class SieveOfEratosthenes:
       raise ValueError("testing prime larger than sieve")
     return self._primes[value>>1]
 
-  def gen_primes(self) -> Iterator[int]:
+  def gen_primes(self, start=0) -> Iterator[int]:
     """Yield each prime up to the sieve's size."""
-    yield 2
+    if start == 0:
+      yield 2
+    start = (start - 1) >> 1
     for p, ok in enumerate(self._primes):
       if not ok: continue
+      if p <= start: continue
       yield (p << 1) + 1
 
   def factors(self, number: int) -> Mapping[int, int]:
@@ -78,10 +81,3 @@ class SieveOfEratosthenes:
         reduced /= p
 
     return factors
-
-
-if __name__ == "__main__":
-  sieve = SieveOfEratosthenes(50)
-  for i in range(2, 50):
-    print(f"{i} = " +
-      " ".join([f"{p}x{v}" for p, v in sieve.factors(i).items()]))
