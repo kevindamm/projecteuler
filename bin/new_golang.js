@@ -33,8 +33,9 @@ if (existsSync(filepath)) {
   process.exit(1);
 }
 
-const { titles } = JSON.parse(await readFile("./public/pe100.json", "utf8"));
-const title_fn = title_if_known(titles, problem_number);
+const titles = await readTitles();
+const problem_title = titleIfKnown(titles, problem_number);
+const title_fn = fnNameFromTitle(titles, problem_number);
 
 // If you aren't me, feel free to change the author name.
 const template = `// Copyright (c) 2025 Kevin Damm
@@ -61,6 +62,10 @@ const template = `// Copyright (c) 2025 Kevin Damm
 
 package solutions
 
+/*
+ * Problem ${problem_number} - ${problem_title}
+ */
+
 func ${title_fn}(limit int) int64 {
   value := int64(0)
 
@@ -81,7 +86,7 @@ console.log(`Done writing Go boilerplate to ${filepath}.`);
 process.exit(0);
 
 
-function title_if_known(titles, pe_num) {
+function titleIfKnown(titles, pe_num) {
   if (!pe_num ||
     typeof(pe_num) != "number" ||
     pe_num < 1 || pe_num >= titles.length) {
@@ -94,4 +99,13 @@ function title_if_known(titles, pe_num) {
   }
   return title.replaceAll(/ (\w)/g,
       (match) => match.slice(1).toUpperCase());
+}
+
+function fnNameFromTitle(title) {
+  if (!title || title === titles[0]) {
+    return "SolutionFunction";
+  }
+  return title.
+    replaceAll(/[_\t,'"-]/g, "").
+    replaceAll(/[\s-]([\w\d])/g, (match) => match.slice(1).toUpperCase());
 }

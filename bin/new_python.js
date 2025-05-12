@@ -45,7 +45,7 @@ if (existsSync(src_filepath)) {
 const test_filepath = path.join(filepath, "test_solve.py")
 
 const titles = await readTitles();
-const problem_title = titleIfKnown(problem_number);
+const problem_title = titleIfKnown(titles, problem_number);
 const title_fn = fnNameFromTitle(problem_title);
 
 // If you aren't me, feel free to change the author name.
@@ -115,7 +115,7 @@ async function readTitles() {
   return metadata?.titles;
 }
 
-function titleIfKnown(pe_num) {
+function titleIfKnown(titles, pe_num) {
   if (!pe_num ||
     typeof(pe_num) != "number" ||
     pe_num < 1 || pe_num >= titles.length) {
@@ -129,6 +129,6 @@ function fnNameFromTitle(title) {
     return "SolutionFunction";
   }
   return title.
-    replaceAll(/[_\t,-]/g, "").
+    replaceAll(/[_\t,'"-]/g, "").
     replaceAll(/[\s-]([\w\d])/g, (match) => match.slice(1).toUpperCase());
 }
