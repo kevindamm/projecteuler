@@ -22,19 +22,34 @@
 
 from typing import Iterator
 
-def gen_multiples(n: int) -> Iterator[int]:
-  """Generate all integers between 1..n that are divisible by either 3 or 5."""
-  i3, i5 = 3, 5
-  i = i3
-  while i < n:
-    yield i
-    if i < i3:
-      i5 += 5
-    else:
-      i3 += 3
-    i = min(i3, i5)
-    if i % 15 == 0:
-      i3 += 3
-
+#region solution
 def SumMultiples3or5(limit: int) -> int:
-  return sum(gen_multiples(limit))
+  return sum(gen_multiples(limit, 3, 5))
+
+def gen_multiples(n: int, i: int, j: int) -> Iterator[int]:
+  """Generate all integers from 1 until n that are divisible by either i or j."""
+  # Ensure ordering of i, j and find their periodicity.
+  if i > j:
+    i, j = j, i
+  p = lcm(i, j)
+
+  # Nudge the lower of the two generated values, walking the sequence to n.
+  t, i_, j_ = i, i, j
+  while t < n:
+    yield t
+    if t < i_:
+      j_ += 5
+    else:
+      i_ += 3
+    t = min(i_, j_)
+    if t % p == 0:
+      i_ += 3
+#endregion solution
+
+def lcm(a: int, b: int) -> int:
+  return round(a * b / gcd(a, b))
+
+def gcd(a: int, b: int) -> int:
+  if b == 0:
+    return a
+  return gcd(b, a%b)
