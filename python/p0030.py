@@ -23,7 +23,7 @@
 from typing import Generator
 from typing import List
 
-def _digit_search_helper(prior: List[int], rem_digits: int) -> Generator[int, None, None]:
+def _digit_search_helper(prior: List[int], rem_digits: int) -> Generator[List[int], None, None]:
   for digit in range(0, 10):
     extended = prior + [digit]
     yield extended
