@@ -18,17 +18,15 @@ first 100 problems
 (in line with [ProjectEuler.net publishing terms](https://projecteuler.net/about#publish)).
 Solutions and writeups can be authored out of sequence.  
 
-I would also be interested in a full set of solutions given in an
-alternative language, such as Haskell or Lua or Lisp or C++ or others,
-as long as there is enough of a difference from the current language set and
-as long as it isn't too esoteric
-(please no [brainf*ck](https://esolangs.org/wiki/Brainfuck),
- no [APL](https://esolangs.org/wiki/APL), no polyglot languages)
-as I will be reviewing the code too.
-
 Other contributions such as documentation, style/design, Vue components, or
 corrections in spelling or citations, are also welcome, as long as they don't
-depart too much from the existing site layout and page organization.
+depart too much from the existing site layout and page organization.  If you
+are interested in contributing solutions in a different language, open an issue
+to discuss which language and your reasoning for selecting that language.  I
+would love to have a broad representation here but I also don't think most
+esolanguages will be useful.  There is certainly some potential for turning this
+into a kind of Rosetta Stone of code solutions, as long as they are idiomatic to
+the language conventions (they should be good representations).
 
 
 Here are some included utilities for generating per-language boilerplate that
