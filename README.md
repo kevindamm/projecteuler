@@ -76,3 +76,13 @@ the header (copyright & source file) but perhaps a root query would be helpful.
 ```sh
 npm x new-prolog 64
 ```
+
+### Starting a solution in OCaml
+
+A new OCaml source file assumes the standard compiler/interpreter from OCaml.org.
+It only includes the header (copyright & source file) and the start of a let
+expression.  Problems were solved using version `4.14.2`
+
+```sh
+npm x new-ocaml 64
+```
