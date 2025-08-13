@@ -20,21 +20,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-github:kevindamm/projecteuler/ocaml/p0001.ml
+github:kevindamm/projecteuler/ocaml/p0002.ml
 *)
 
-(* Problem 0001 - Multiples of 3 or 5 *)
+(* Problem 0002 - Even Fibonacci Numbers *)
 
-let value i =
-  match i mod 3, i mod 5 with
-    0, _ -> i
-  | _, 0 -> i
-  | _    -> 0
 
-let sum_values limit =
-  let rec aux acc i =
-    if i <= 0 then acc else aux (acc + value i) (i-1)
-  in aux 0 (limit-1)
+let acc_even acc x =
+  if x mod 2 == 0 then acc + x else acc
+
+let sum_even_fibs limit =
+  let rec fib_aux acc a b =
+    let acc_next = acc_even acc a in
+    if b > limit then acc_next else fib_aux acc_next b (a + b)
+  in
+  fib_aux 0 0 1
 
 let _ =
-  print_endline (string_of_int (sum_values 1000))
+  print_endline (string_of_int (sum_even_fibs 100))
+(* 44 *)
+

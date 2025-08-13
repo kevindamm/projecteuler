@@ -64,8 +64,11 @@ github:kevindamm/projecteuler/ocaml/p${digits_padded}.ml
 
 (* Problem ${digits_padded} - ${title} *)
 
+let fn limit =
+  limit+1
+
 let _ =
-  print_newline "oh!"
+  print_endline fn limit
 `;
 
 
