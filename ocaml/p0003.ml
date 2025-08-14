@@ -30,20 +30,27 @@ let is_prime n =
     x * x > n || n mod x <> 0 && n mod (x + 2) <> 0 && test (x + 6)
   in
   if n < 5
-    then n lor 1 = 3
-    else n land 1 <> 0 && n mod 3 <> 0 && test 5
+  then n lor 1 = 3
+  else n land 1 <> 0 && n mod 3 <> 0 && test 5
+
+let seq_prime =
+  Seq.ints 2 |> Seq.filter is_prime
+
+let prime_factors x =
+  seq_prime |> Seq.take_while ( fun p -> p <= (x/2) ) |> Seq.take_while (fun p -> (x mod p == 0))
+
+let last_el seq =
+  let p = Seq.length seq in
+  Some (p, seq)
 
 let largest_prime_factor x =
-  let rec factor_search n p =
-    if n >= x then (if p == 1 then n else p) else
-      if not (is_prime n) then factor_search (n+1) p else
-        if x mod n == 0 then factor_search (n+1) n else
-          factor_search (n+1) p
-  in
-  factor_search 2 1
+  match last_el (prime_factors x) with
+  | None -> x
+  | Some (p, _) -> p
+
 
 let _ =
   print_endline (string_of_int (largest_prime_factor 13195))
-  (*
+(*
   print_endline (string_of_int (largest_prime_factor 600851475143))
   *)
