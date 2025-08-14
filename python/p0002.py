@@ -23,8 +23,7 @@
 from collections.abc import Iterator
 
 def fib(n: int) -> Iterator[int]:
-  i, j = 1, 2
-  yield 1
+  i, j = 0, 1
   while j < n:
     yield j
     i, j = j, i+j

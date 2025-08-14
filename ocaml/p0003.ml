@@ -20,22 +20,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-github:kevindamm/projecteuler/ocaml/p0001.ml
+github:kevindamm/projecteuler/ocaml/p0003.ml
 *)
 
-(* Problem 0001 - Multiples of 3 or 5 *)
+(* Problem 0003 - Largest Prime Factor *)
 
-let value i =
-  match i mod 3, i mod 5 with
-    0, _ -> i
-  | _, 0 -> i
-  | _    -> 0
+let is_prime n =
+  let rec test x =
+    x * x > n || n mod x <> 0 && n mod (x + 2) <> 0 && test (x + 6)
+  in
+  if n < 5
+    then n lor 1 = 3
+    else n land 1 <> 0 && n mod 3 <> 0 && test 5
 
-let sum_values limit =
-  let rec aux acc i =
-    if i <= 0 then acc else aux (acc + value i) (i-1)
-  in aux 0 (limit-1)
-
+let largest_prime_factor x =
+  let rec factor_search n p =
+    if n >= x then (if p == 1 then n else p) else
+      if not (is_prime n) then factor_search (n+1) p else
+        if x mod n == 0 then factor_search (n+1) n else
+          factor_search (n+1) p
+  in
+  factor_search 2 1
 
 let _ =
-  print_endline (string_of_int (sum_values 1000))
+  print_endline (string_of_int (largest_prime_factor 13195))
+  (*
+  print_endline (string_of_int (largest_prime_factor 600851475143))
+  *)

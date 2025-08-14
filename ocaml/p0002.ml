@@ -25,16 +25,17 @@ github:kevindamm/projecteuler/ocaml/p0002.ml
 
 (* Problem 0002 - Even Fibonacci Numbers *)
 
-
 let acc_even acc x =
   if x mod 2 == 0 then acc + x else acc
 
 let sum_even_fibs limit =
   let rec fib_aux acc a b =
     let acc_next = acc_even acc a in
-    if b > limit then acc_next else fib_aux acc_next b (a + b)
+    if b >= limit then acc_next else
+      fib_aux acc_next b (a + b)
   in
   fib_aux 0 0 1
+
 
 let _ =
   print_endline (string_of_int (sum_even_fibs 100))
