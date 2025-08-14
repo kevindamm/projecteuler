@@ -33,24 +33,14 @@ let is_prime n =
   then n lor 1 = 3
   else n land 1 <> 0 && n mod 3 <> 0 && test 5
 
-let seq_prime =
-  Seq.ints 2 |> Seq.filter is_prime
 
 let prime_factors x =
-  seq_prime |> Seq.take_while ( fun p -> p <= (x/2) ) |> Seq.take_while (fun p -> (x mod p == 0))
+  Seq.ints 2
+    |> Seq.filter is_prime
+    |> Seq.take_while ( fun p -> (p * p <= x) )
+    |> Seq.filter ( fun p -> (x mod p = 0) )
 
-let last_el seq =
-  let p = Seq.length seq in
-  Some (p, seq)
 
 let largest_prime_factor x =
-  match last_el (prime_factors x) with
-  | None -> x
-  | Some (p, _) -> p
-
-
-let _ =
-  print_endline (string_of_int (largest_prime_factor 13195))
-(*
-  print_endline (string_of_int (largest_prime_factor 600851475143))
-  *)
+  let take_last _ x = x in 
+  Seq.fold_left take_last 0 (prime_factors x)

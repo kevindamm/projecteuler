@@ -31,11 +31,8 @@ let value i =
   | _, 0 -> i
   | _    -> 0
 
+
 let sum_values limit =
   let rec aux acc i =
     if i <= 0 then acc else aux (acc + value i) (i-1)
   in aux 0 (limit-1)
-
-
-let _ =
-  print_endline (string_of_int (sum_values 1000))
