@@ -45,6 +45,6 @@ let prime_factors x =
 
 
 let largest_prime_factor x =
-  let take_last _ x = x in 
+  let take_last _ last = last in 
   (prime_factors x)
   |> Seq.fold_left take_last 0
