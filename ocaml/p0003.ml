@@ -27,7 +27,10 @@ github:kevindamm/projecteuler/ocaml/p0003.ml
 
 let is_prime n =
   let rec test x =
-    x * x > n || n mod x <> 0 && n mod (x + 2) <> 0 && test (x + 6)
+    x * x > n ||
+    n mod x <> 0 &&
+    n mod (x + 2) <> 0 &&
+    test (x + 6)
   in
   if n < 5
   then n lor 1 = 3
@@ -43,4 +46,5 @@ let prime_factors x =
 
 let largest_prime_factor x =
   let take_last _ x = x in 
-  Seq.fold_left take_last 0 (prime_factors x)
+  (prime_factors x)
+  |> Seq.fold_left take_last 0
