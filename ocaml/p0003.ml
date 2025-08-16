@@ -26,15 +26,16 @@ github:kevindamm/projecteuler/ocaml/p0003.ml
 (* Problem 0003 - Largest Prime Factor *)
 
 let is_prime n =
-  let rec test x =
-    x * x > n ||
-    n mod x <> 0 &&
-    n mod (x + 2) <> 0 &&
-    test (x + 6)
-  in
-  if n < 5
-  then n lor 1 = 3
-  else n land 1 <> 0 && n mod 3 <> 0 && test 5
+  if n <= 1 then false
+  else if n = 2 then true
+  else if n mod 2 = 0 then false
+  else
+    let rec check_divisors d =
+      if d * d > n then true
+      else if n mod d = 0 then false
+      else check_divisors (d + 2)
+    in
+    check_divisors 3
 
 
 let prime_factors x =
