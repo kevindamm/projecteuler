@@ -27,20 +27,22 @@ github:kevindamm/projecteuler/ocaml/p0004.ml
 
 (*
 Helper utility for generating all pairs (including alike),
-in descending order (until down to from).
+in descending order.  The parameters a and b are the endpoints
+of the range, but can appear in either order (a > b or a < b).
+If equal (a = b) then only the single pair is included in the
+sequence.  Negative values are allowed.
 *)
-let all_pairs_desc from until =
-  let upper = (max from until)-1 in
-  let lower = min from until in
-  let rec all_pairs_aux a b = fun () ->
-  if b >= lower
-  then Seq.Cons ((a, b), all_pairs_aux a (b-1))
-  else begin
-    if a > lower
-    then Seq.Cons ((a-1, a-1), all_pairs_aux (a-1) (a-2))
-    else Seq.Nil
-  end
-  in all_pairs_aux upper upper
+let all_pairs_desc a b : (int * int) Seq.t =
+  let lower = min a b in
+  let int_range_desc up dn =
+    Seq.ints 0 |> Seq.take (up-dn) |> Seq.map (fun x -> up-x)
+  in
+  let seq_ij i =
+    int_range_desc i lower |> Seq.map (fun j -> (i, j))
+  in
+  int_range_desc ((max a b)-1) lower
+  |> Seq.flat_map seq_ij
+
 
 (* Tests if the characters in a string are palindromic. *)
 let is_palindrome s : bool =
@@ -54,7 +56,7 @@ let is_palindrome s : bool =
 
 (*
 For the product of each pair within the stated range,
-return the largets palindrome.
+return the largest palindrome.
 *)
 let largest_palindrome from until : int =
   let prod_of_pair (a, b) = a * b in
