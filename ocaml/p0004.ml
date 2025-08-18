@@ -64,16 +64,23 @@ let all_pairs_desc from until =
 
 let prod_of_pair (a, b) = a * b
 
-let string_of_pair = function
-  | (a, b) -> (string_of_int a) ^ ", " ^ (string_of_int b)
-
+let is_palindrome s =
+  let len = String.length s in
+  let rec check i j =
+    if i >= j then true
+    else if s.[i] <> s.[j] then false
+    else check (i + 1) (j - 1)
+  in
+  check 0 (len-1)
 
 let _ = 
   let take_largest acc x =
     if x > acc then x else acc in
   (all_pairs_desc 100 1000)
   |> Seq.map prod_of_pair
-  |> Seq.filter is_palindrome
-  |> Seq.fold_left take_largest 0
   |> Seq.map string_of_int
-  |> Seq.iter print_endline
+  |> Seq.filter is_palindrome
+  |> Seq.map int_of_string
+  |> Seq.fold_left take_largest 0
+  |> string_of_int
+  |> print_endline
