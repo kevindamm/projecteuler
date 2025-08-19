@@ -1,10 +1,14 @@
 {
 	"recommendations": [
-		"Vue.volar",
+		"vue.volar",
 		"davidanson.vscode-markdownlint",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"cuelangorg.vscode-cue",
-		"github.vscode-github-actions"
+    "ocamllabs.ocaml-platform",
+    "golang.go",
+    "ms-python.python",
+    "ms-python.vscode-python-envs",
+    "ms-vscode.vscode-typescript-next",
+		"cuelangorg.vscode-cue"
 	]
 }
