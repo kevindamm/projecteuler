@@ -30,17 +30,11 @@ We could define an n-ary (here, 20-ary) LCM routine that sifts through
 the list of factors of each number between 1..20, but we don't need to
 know the full prime factorization of these values, we only need to know
 their common multiple.
-
-It can be shown that the LCM of the combined is the same as the LCM of
-each pair of values, as long as each value in the range is represented
-in at least one pairing.  Indeed, a tree is probably the most efficient
-at n/2 LCM calls, but the straightforward (n-1) LCM calls works just
-fine for small values, and anyway is of the same computational complexity.
 *)
 
-(*
-For any pair of values we can find its LCM using
-  LCM = (a * b) / GCD.
+(* For any pair of values `a`, `b` their least common multiple is the
+same as their product divided by their greatest common denominator, the
+GCD is calculated as the result of the well-known Euclidean Algorithm.
 *)
 let lcm a b =
   let rec gcd a b =
@@ -49,16 +43,18 @@ let lcm a b =
   in
   (a * b) / (gcd a b)
   
-
-let countdown2 start : int Seq.t =
-  Seq.ints 0 |> Seq.map (fun x -> (start-x)) |> Seq.take (start-1)
-  
-
-let lcmall until =
+(* Calculates the LCM of all values up to and including `final`.  This
+is done by chaining a sequence of LCM calls with each value in the range,
+a total of (n-1) LCM calls.  Indeed, a tree is probably the most efficient
+at approximately (n/2) LCM calls, but the straightforward approach works
+well and is much easier to read.  They are the same computational complexity.
+*)
+let lcmall final =
   let combine_lcms acc x = lcm acc x in
-  countdown2 (until-1)
-  |> Seq.fold_left combine_lcms until
-
-
-let _ =
-  lcmall 20 |> string_of_int |> print_endline
+  let countdown =
+    Seq.ints 0
+    |> Seq.map (fun x -> (final-x))
+    |> Seq.take (final-2)
+  in
+  countdown
+  |> Seq.fold_left combine_lcms final

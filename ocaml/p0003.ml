@@ -25,6 +25,7 @@ github:kevindamm/projecteuler/ocaml/p0003.ml
 
 (* Problem 0003 - Largest Prime Factor *)
 
+(* Primality check that linearly tests each odd value less than (sqrt n). *)
 let is_prime n : bool =
   if n <= 1 then false
   else if n = 2 then true
@@ -37,14 +38,14 @@ let is_prime n : bool =
     in
     check_divisors 3
 
-
+(* Returns a sequence of the prime factors of `x`. *)
 let prime_factors x : int Seq.t =
   Seq.ints 2
     |> Seq.filter is_prime
     |> Seq.take_while ( fun p -> (p * p <= x) )
     |> Seq.filter ( fun p -> (x mod p = 0) )
 
-
+(* Returns the largest prime factor of `x` *)
 let largest_prime_factor x : int =
   let take_last _ last = last in 
   (prime_factors x)

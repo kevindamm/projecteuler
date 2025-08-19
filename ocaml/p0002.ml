@@ -25,15 +25,16 @@ github:kevindamm/projecteuler/ocaml/p0002.ml
 
 (* Problem 0002 - Even Fibonacci Numbers *)
 
-let sum_even_fibs limit =
+(* Returns the sum of all even Fibonacci values less than `limit`. *)
+let sum_even_fibs limit : int =
   let rec evenfib_aux acc a b =
     let sum_even =
-      if a mod 2 = 0
+      if a land 1 = 0
       then acc + a
       else acc
     in
-      if b >= limit
-      then sum_even
-      else evenfib_aux sum_even b (a + b)
+    if b >= limit
+    then sum_even
+    else evenfib_aux sum_even b (a + b)
   in
   evenfib_aux 0 0 1

@@ -47,7 +47,7 @@ let all_pairs_desc a b : (int * int) Seq.t =
   |> Seq.flat_map seq_ij
 
 
-(* Tests if the digits of a number (in base 10) form a palindrome. *)
+(* Tests if the digits of a number form a palindromw in base 10. *)
 let is_palindrome n : bool =
   let s = string_of_int n in
   let len = String.length s in
