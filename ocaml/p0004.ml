@@ -30,22 +30,26 @@ Helper utility for generating all pairs (including alike),
 in descending order.  The parameters a and b are the endpoints
 of the range, but can appear in either order (a > b or a < b).
 If equal (a = b) then only the single pair is included in the
-sequence.  Negative values are allowed.
+sequence.  Negative values are allowed.  The upper bound is
+exclusive while the lower bound is inclusive, as per problem
+definition.
 *)
 let all_pairs_desc a b : (int * int) Seq.t =
   let lower = min a b in
   let int_range_desc up dn =
-    Seq.ints 0 |> Seq.take (up-dn) |> Seq.map (fun x -> up-x)
+    Seq.ints 1 |> Seq.take (up-dn) |> Seq.map (fun x -> up-x)
   in
   let seq_ij i =
-    int_range_desc i lower |> Seq.map (fun j -> (i, j))
+    int_range_desc i lower
+    |> Seq.map (fun j -> (i, j))
   in
-  int_range_desc ((max a b)-1) lower
+  int_range_desc (max a b - 1) lower
   |> Seq.flat_map seq_ij
 
 
-(* Tests if the characters in a string are palindromic. *)
-let is_palindrome s : bool =
+(* Tests if the digits of a number (in base 10) form a palindrome. *)
+let is_palindrome n : bool =
+  let s = string_of_int n in
   let len = String.length s in
   let rec check i j =
     if i >= j then true
@@ -55,7 +59,7 @@ let is_palindrome s : bool =
   check 0 (len-1)
 
 (*
-For the product of each pair within the stated range,
+For the product of each pair within the stated range (except `until`),
 return the largest palindrome.
 *)
 let largest_palindrome from until : int =
@@ -65,7 +69,5 @@ let largest_palindrome from until : int =
   in
   (all_pairs_desc from until)
   |> Seq.map prod_of_pair
-  |> Seq.map string_of_int
   |> Seq.filter is_palindrome
-  |> Seq.map int_of_string
   |> Seq.fold_left take_largest 0
