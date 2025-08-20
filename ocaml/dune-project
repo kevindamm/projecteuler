@@ -1,0 +1,29 @@
+(lang dune 3.19)
+
+(name pe100)
+
+(generate_opam_files true)
+
+(source
+ (github kevindamm/projecteuler))
+
+(authors "Kevin Damm <github@kevindamm.com>")
+
+(maintainers "Kevin Damm <github@kevindamm.com>")
+
+(license MIT)
+
+(documentation https://pe100.net/about)
+
+; See also docs for Dune project configuration schema:
+; https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
+
+(package
+ (name pe100)
+ (synopsis "Project Euler 100")
+ (description "Analysis of solutions to the first 100 problems")
+ (depends ocaml)
+ (tags
+  ("projecteuler" "polyglot" "programming" "puzzles"
+   "algorithms" "analysis" "complexity" "education"
+   "math" "number theory")))

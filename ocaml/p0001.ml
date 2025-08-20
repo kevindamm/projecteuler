@@ -25,15 +25,17 @@ github:kevindamm/projecteuler/ocaml/p0001.ml
 
 (* Problem 0001 - Multiples of 3 or 5 *)
 
-(* Returns the value if it matches the (mod 3 OR mod 5) filter, else 0. *)
-let value i =
-  match i mod 3, i mod 5 with
-    0, _ -> i
-  | _, 0 -> i
-  | _    -> 0
-
-(* Returns the sum of all values less than `limit` passing the above filter. *)
+(* Returns the sum of all values less than `limit` divisible by 3 or 5. *)
 let sum_values limit =
-  let rec aux acc i =
-    if i <= 0 then acc else aux (acc + value i) (i-1)
-  in aux 0 (limit-1)
+  let add_3_5 acc i =
+    match i mod 3, i mod 5 with
+      0, _ -> acc + i
+    | _, 0 -> acc + i
+    | _    -> acc
+  in
+  Seq.ints 1
+  |> Seq.take (limit-1)
+  |> Seq.fold_left add_3_5 0
+
+
+let%test _ = sum_values 100 = 2318
