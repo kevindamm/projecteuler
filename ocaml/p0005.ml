@@ -52,9 +52,9 @@ well and is much easier to read.  They are the same computational complexity.
 let lcmall final =
   let combine_lcms acc x = lcm acc x in
   let countdown =
-    Seq.ints 0
+    Seq.ints 1
     |> Seq.map (fun x -> (final-x))
-    |> Seq.take (final-2)
+    |> Seq.take (final-2) (* omit `1` and start at n-1, folds with n *)
   in
   countdown
   |> Seq.fold_left combine_lcms final
