@@ -20,19 +20,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-github:kevindamm/projecteuler/ocaml/p0007.ml
+github:kevindamm/projecteuler/ocaml/p0008.ml
 *)
 
-(* Problem 0007 - 10,001st Prime *)
+(* Problem 0008 - Largest Product in a Series *)
 
-(* Calculates the nth prime (where 2 is the 1st prime). *)
-let nth_prime n =
-  let next i = if i mod 3 = 1 then i + 4 else i + 2 in
-  let rec prime_search i ps = function
-    | 0 -> List.hd ps
-    | n ->
-        if List.for_all (fun p -> i mod p > 0) ps
-        then prime_search (next i) (i :: ps) (n - 1)
-        else prime_search (next i)  ps        n
+let digits (filepath: string) : int list list =
+  let int_of_char ch = Char.code ch - Char.code '0' in
+  let lines =
+    In_channel.with_open_text filepath In_channel.input_lines
   in
-  prime_search 3 [ 2 ] (n - 1)
+  let digits_of_line line =
+    String.to_seq line |> Seq.map int_of_char |> List.of_seq
+  in
+  List.map digits_of_line lines
+
+(* TODO this works for 4 but not for arbitrary count *)
+(* WARNING count is declared but not used *)
+let rec max_adjacent_product count = function
+  | []            
+  | [          _ ]
+  | [       _; _ ]
+  | [    _; _; _ ] -> 0
+  | [ a; b; c; d ] -> (a * b * c * d)
+  | a :: b :: c :: d :: tail -> max (a * b * c * d) (max_adjacent_product count (b :: c :: d :: tail))
+
+
+let max_digits count =
+  digits "../public/data/0008_digits.txt"
+  |> List.map (max_adjacent_product count)
+  |> List.fold_left max Int.min_int
+
+let _ =
+  max_digits 4 |> string_of_int |> print_endline
